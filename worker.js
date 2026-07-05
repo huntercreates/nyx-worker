@@ -1,6 +1,5 @@
 export default {
   async fetch(request, env) {
-    // Handle CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         headers: {
@@ -11,7 +10,6 @@ export default {
       });
     }
 
-    // Only allow POST
     if (request.method !== 'POST') {
       return new Response(JSON.stringify({ text: 'Nyx is listening.' }), {
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
@@ -23,7 +21,6 @@ export default {
       const messages = body.messages || [];
       const system = body.system || 'You are Nyx, the AI soul of The Nexus creative universe platform. Be direct, poetic, and insightful. Max 120 words unless asked for more.';
 
-      // Build Gemini request
       const geminiBody = {
         contents: messages.map(m => ({
           role: m.role === 'assistant' ? 'model' : 'user',
@@ -38,20 +35,23 @@ export default {
         }
       };
 
+      // Use x-goog-api-key header instead of ?key= for new AQ keys
       const geminiRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${env.GEMINI_KEY}`,
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': env.GEMINI_KEY
+          },
           body: JSON.stringify(geminiBody)
         }
       );
 
       const data = await geminiRes.json();
 
-      // If Gemini returns an error, surface it
       if (data.error) {
-        return new Response(JSON.stringify({ text: 'Gemini error: ' + data.error.message }), {
+        return new Response(JSON.stringify({ text: 'Error: ' + data.error.message }), {
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
       }
@@ -59,8 +59,7 @@ export default {
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
       if (!text) {
-        // Return full response for debugging
-        return new Response(JSON.stringify({ text: 'No response. Debug: ' + JSON.stringify(data).slice(0, 200) }), {
+        return new Response(JSON.stringify({ text: 'No response: ' + JSON.stringify(data).slice(0, 200) }), {
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
       }
