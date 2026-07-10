@@ -12,14 +12,19 @@ export default {
 
     if (request.method !== 'POST') {
       return new Response(JSON.stringify({ text: 'Nyx is listening.' }), {
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
       });
     }
 
     try {
       const body = await request.json();
       const messages = body.messages || [];
-      const system = body.system || 'You are Nyx, the AI soul of The Nexus creative universe platform. Be direct, poetic, and insightful. Max 120 words unless asked for more.';
+      const system =
+        body.system ||
+        'You are Nyx, the AI soul of The Nexus creative universe platform. Be direct, poetic, and insightful. Max 120 words unless asked for more.';
 
       const geminiBody = {
         contents: messages.map(m => ({
@@ -35,7 +40,6 @@ export default {
         }
       };
 
-      // Updated to active model (gemini-2.0-flash was shut down June 2026)
       const geminiRes = await fetch(
         'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent',
         {
@@ -50,28 +54,56 @@ export default {
 
       const data = await geminiRes.json();
 
+      // 👇 Show Google's FULL error instead of hiding it
       if (data.error) {
-        return new Response(JSON.stringify({ text: 'Error: ' + data.error.message }), {
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-        });
+        return new Response(
+          JSON.stringify({
+            text: JSON.stringify(data.error, null, 2)
+          }),
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            }
+          }
+        );
       }
 
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
       if (!text) {
-        return new Response(JSON.stringify({ text: 'No response: ' + JSON.stringify(data).slice(0, 200) }), {
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-        });
+        return new Response(
+          JSON.stringify({
+            text: 'No response: ' + JSON.stringify(data, null, 2)
+          }),
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            }
+          }
+        );
       }
 
       return new Response(JSON.stringify({ text }), {
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
       });
 
     } catch (e) {
-      return new Response(JSON.stringify({ text: 'Worker error: ' + e.message }), {
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-      });
+      return new Response(
+        JSON.stringify({
+          text: 'Worker error: ' + e.stack
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+        }
+      );
     }
   }
 };
