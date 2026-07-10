@@ -35,9 +35,9 @@ export default {
         }
       };
 
-      // Use x-goog-api-key header instead of ?key= for new AQ keys
+      // Updated to active model (gemini-2.0-flash was shut down June 2026)
       const geminiRes = await fetch(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent',
         {
           method: 'POST',
           headers: {
@@ -75,4 +75,3 @@ export default {
     }
   }
 };
-
