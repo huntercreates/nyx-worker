@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>The Nexus — Creative Universe</title>
+<meta name="description" content="The Nexus: characters, worlds, lore, poetry and stories. One universe, every story.">
+<meta name="theme-color" content="#0a0a12">
+<meta property="og:title" content="The Nexus — Creative Universe">
+<meta property="og:description" content="Characters, worlds, lore, poetry and stories, built by Hunter and open to the community.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230a0a12'/%3E%3Cpath d='M32 10l6 16 16 6-16 6-6 16-6-16-16-6 16-6z' fill='%238b7cf6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a12;--bg2:#10111a;--bg3:#171824;--card:#161723;--border:#202233;--border2:#2f3150;--text:#ecebf4;--text2:#a0a0ba;--text3:#6c6c8a;--acc:#8b7cf6;--acc2:#8b7cf6b0;--accbg:#8b7cf61c;--red:#e05555;--redbg:rgba(224,85,85,.12);--green:#4ade80;--greenbg:rgba(74,222,128,.1);--blue:#5a9ef8;--bluebg:rgba(90,158,248,.1);--purple:#a78bfa;--purplebg:rgba(167,139,250,.1);--font:'Inter',system-ui,-apple-system,sans-serif;--serif:'Fraunces',Georgia,serif;--gold:#e8b84b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+@keyframes up{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(232,184,75,.15);}50%{box-shadow:0 0 22px rgba(232,184,75,.35);}}
+@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+@keyframes floatIn{from{opacity:0;transform:translateY(18px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes softPulse{0%,100%{opacity:.7;}50%{opacity:1;}}
+.fade{animation:floatIn .35s cubic-bezier(.16,1,.3,1);}
+.fade-fast{animation:up .2s ease;}
+.glow-acc{animation:glow 3s ease-in-out infinite;}
+input,select,textarea,button{font-family:inherit;}
+/* LAYOUT */
+#app{display:flex;height:100vh;overflow:hidden;}
+/* SIDEBAR */
+#sb{width:200px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:width .2s;overflow:hidden;}
+#sb.col{width:52px;}
+.sb-head{padding:1rem .9rem .8rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;min-height:56px;flex-shrink:0;}
+.sb-brand{overflow:hidden;}
+.sb-name{font-weight:700;font-size:1rem;color:var(--acc);white-space:nowrap;}
+.sb-sub{font-family:monospace;font-size:.4rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+.sb-tog{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.9rem;flex-shrink:0;padding:.1rem;transition:color .15s;}
+.sb-tog:hover{color:var(--acc);}
+.sb-srch{padding:.5rem .75rem;border-bottom:1px solid var(--border);flex-shrink:0;}
+.sb-srch input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:.3rem .55rem;color:var(--text);font-size:.7rem;outline:none;box-sizing:border-box;}
+.sb-nav{flex:1;overflow-y:auto;overflow-x:hidden;}
+.sb-sec{font-family:monospace;font-size:.4rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);padding:.28rem .9rem .18rem;border-top:1px solid var(--border);}
+.ni{display:flex;align-items:center;gap:.55rem;padding:.52rem .9rem;cursor:pointer;border-left:2px solid transparent;transition:all .2s cubic-bezier(.16,1,.3,1);}
+.ni:hover{background:var(--accbg);padding-left:1.1rem;}
+.ni.on{background:var(--accbg);border-left-color:var(--acc);}
+.ni.on .nl{color:var(--acc);font-weight:700;}
+.ni-ico{font-size:.82rem;width:18px;text-align:center;flex-shrink:0;}
+.nl{font-size:.78rem;color:var(--text2);}
+.nc{margin-left:auto;font-family:monospace;font-size:.42rem;background:var(--border2);color:var(--text3);padding:.07rem .28rem;border-radius:20px;}
+.ni.on .nc{background:var(--acc2);color:var(--bg);}
+.sb-foot{padding:.62rem .8rem;border-top:1px solid var(--border);flex-shrink:0;}
+.sb-user{display:flex;align-items:center;gap:.5rem;}
+.uav{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--acc2),var(--acc));display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:var(--bg);flex-shrink:0;cursor:pointer;}
+.ui{flex:1;min-width:0;overflow:hidden;}
+.un{font-size:.7rem;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ur{font-family:monospace;font-size:.4rem;color:var(--acc);text-transform:uppercase;letter-spacing:.07em;}
+.sb-set{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.76rem;flex-shrink:0;transition:color .15s;}
+.sb-set:hover{color:var(--text);}
+.str-bar{display:flex;gap:.65rem;margin-top:.35rem;justify-content:center;}
+.str-i{font-family:monospace;font-size:.41rem;}
+/* MAIN */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+.topbar{padding:.68rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg);flex-shrink:0;}
+.tb-title{font-weight:700;font-size:.93rem;color:var(--text);}
+.tb-r{display:flex;align-items:center;gap:.55rem;}
+.vstats{font-family:monospace;font-size:.44rem;color:var(--text3);}
+#content{flex:1;overflow-y:auto;padding:1.5rem;}
+/* MOBILE NAV */
+#mobnav{display:none;position:fixed;bottom:0;left:0;right:0;background:#111218;border-top:1px solid var(--border);z-index:90;padding:.45rem 0;overflow-x:auto;}
+.mb{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.32rem .68rem;cursor:pointer;border:none;background:none;color:var(--text3);min-width:56px;flex-shrink:0;transition:color .15s;}
+.mb.on{color:var(--acc);}
+.mbi{font-size:1.2rem;}
+.mbl{font-family:monospace;font-size:.43rem;text-transform:uppercase;}
+/* CARDS */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:1rem;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);}
+.card:hover{border-color:var(--acc2);transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.4),0 0 0 1px var(--acc2);}
+.card:hover .cc{filter:brightness(1.08);}
+.cc{height:108px;overflow:hidden;background:linear-gradient(135deg,var(--bg3),var(--border));display:flex;align-items:center;justify-content:center;font-size:2rem;}
+.cc img{width:100%;height:100%;object-fit:cover;}
+.cb{padding:1rem;}
+.ct{font-family:monospace;font-size:.45rem;letter-spacing:.13em;text-transform:uppercase;color:var(--acc);margin-bottom:5px;}
+.ctit{font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:6px;line-height:1.35;}
+.cdesc{font-size:.77rem;color:var(--text2);line-height:1.65;margin-bottom:.6rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.cf{display:flex;align-items:center;justify-content:space-between;}
+.cauth{font-family:monospace;font-size:.45rem;color:var(--text3);}
+.clikes{font-family:monospace;font-size:.49rem;color:var(--text3);cursor:pointer;background:none;border:none;transition:color .15s;}
+.clikes:hover{color:var(--red);}
+/* BUTTONS */
+.btn{font-family:var(--font);font-size:.73rem;font-weight:700;padding:.38rem .9rem;border-radius:7px;border:none;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.3rem;white-space:nowrap;}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.btn-g{background:var(--acc);color:var(--bg);}
+.btn-r{background:var(--redbg);color:var(--red);border:1px solid var(--red);}
+.btn-gr{background:var(--greenbg);color:var(--green);border:1px solid var(--green);}
+.btn-b{background:var(--bluebg);color:var(--blue);border:1px solid var(--blue);}
+.btn-p{background:var(--purplebg);color:var(--purple);border:1px solid var(--purple);}
+.btn-gh{background:transparent;color:var(--text2);border:1px solid var(--border2);}
+.btn-gh:hover{border-color:var(--acc2);color:var(--acc);}
+.btn-sm{padding:.22rem .48rem;font-size:.64rem;}
+/* INPUTS */
+.inp,.ta,.sel{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:.5rem .75rem;color:var(--text);font-family:var(--font);font-size:.83rem;outline:none;box-sizing:border-box;transition:border-color .15s;}
+.inp:focus,.ta:focus,.sel:focus{border-color:var(--acc2);}
+.ta{resize:vertical;min-height:90px;}
+.sel{cursor:pointer;}
+.pw-w{position:relative;}
+.pw-w input{padding-right:2.2rem;}
+.pw-tog{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);font-size:.75rem;}
+/* LABELS / BADGES */
+.lbl{font-family:monospace;font-size:.5rem;letter-spacing:.13em;text-transform:uppercase;color:var(--text3);display:block;margin-top:12px;margin-bottom:5px;}
+.bdg{font-family:monospace;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;padding:.17rem .42rem;border-radius:5px;}
+.bdg-g{background:var(--accbg);color:var(--acc);}
+.bdg-r{background:var(--redbg);color:var(--red);}
+.bdg-gr{background:var(--greenbg);color:var(--green);}
+.bdg-b{background:var(--bluebg);color:var(--blue);}
+.bdg-gh{background:var(--border);color:var(--text2);}
+/* SECTIONS */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
+.sec-t{font-weight:700;font-size:.95rem;color:var(--text);}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--bg3),var(--bg2));border:1px solid var(--border);border-radius:14px;padding:2rem;margin-bottom:2rem;}
+.hero-eye{font-family:monospace;font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);margin-bottom:7px;}
+.hero-t{font-weight:700;font-size:1.6rem;color:var(--text);line-height:1.1;margin-bottom:.65rem;}
+.hero-s{color:var(--text2);font-size:.87rem;line-height:1.85;}
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
+.sn{font-weight:700;font-size:1.6rem;color:var(--acc);line-height:1;}
+.sl{font-family:monospace;font-size:.44rem;letter-spacing:.11em;text-transform:uppercase;color:var(--text3);margin-top:5px;}
+/* FILTER BAR */
+.fbar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.25rem;}
+.fb{background:transparent;color:var(--text3);border:1px solid var(--border2);padding:.22rem .55rem;font-size:.65rem;border-radius:20px;cursor:pointer;font-family:var(--font);transition:all .15s;}
+.fb.on{background:var(--accbg);color:var(--acc);border-color:var(--acc2);}
+/* AD SLOT */
+.ad{width:100%;height:68px;border:1px dashed var(--border2);border-radius:10px;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(45deg,var(--bg3) 0,var(--bg3) 8px,var(--bg2) 8px,var(--bg2) 16px);margin-bottom:1.75rem;}
+.ad span{font-family:monospace;font-size:.44rem;color:var(--text3);}
+/* OVERLAY */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+.ob{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;max-width:660px;width:100%;max-height:88vh;overflow-y:auto;}
+.oh{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.ot{font-weight:700;font-size:1.05rem;color:var(--text);}
+.oc{background:none;border:none;color:var(--text3);font-size:1.15rem;cursor:pointer;}
+.obody{padding:1.25rem 1.5rem;}
+/* ITEM ROWS */
+.irow{display:flex;align-items:center;gap:.6rem;padding:.68rem .9rem;background:var(--bg3);border:1px solid var(--border);border-radius:9px;margin-bottom:.42rem;}
+.irt{font-weight:700;font-size:.8rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.irm{font-family:monospace;font-size:.44rem;color:var(--text3);}
+/* ADMIN TABS */
+.atabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;}
+.atab{background:transparent;border:none;border-bottom:2px solid transparent;padding:.55rem .88rem;font-size:.67rem;font-weight:700;cursor:pointer;color:var(--text2);white-space:nowrap;font-family:var(--font);transition:all .15s;}
+.atab.on{color:var(--acc);border-bottom-color:var(--acc);background:var(--accbg);}
+/* ADMIN STATS */
+.asgs{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.25rem;}
+.asc{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.1rem;}
+.asn{font-weight:700;font-size:1.4rem;color:var(--acc);line-height:1;}
+.asl{font-family:monospace;font-size:.44rem;color:var(--text3);margin-top:5px;text-transform:uppercase;}
+/* WRITE EDITOR */
+.etb{background:var(--bg3);border:1px solid var(--border);border-radius:9px 9px 0 0;padding:.42rem .58rem;display:flex;flex-wrap:wrap;gap:.14rem;align-items:center;}
+.tbtn{background:transparent;color:var(--text2);border:1px solid var(--border2);padding:.2rem .38rem;font-size:.64rem;border-radius:5px;cursor:pointer;min-width:26px;line-height:1.25;font-family:serif;transition:all .15s;}
+.tbtn:hover{background:var(--accbg);color:var(--acc);border-color:var(--acc2);}
+.tdiv{width:1px;height:16px;background:var(--border2);margin:0 .07rem;}
+.ea{background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 9px 9px;padding:1.3rem 1.45rem;min-height:320px;outline:none;color:var(--text);font-size:.93rem;line-height:1.9;word-break:break-word;}
+.efoot{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem;padding:.62rem .88rem;background:var(--bg3);border-radius:9px;flex-wrap:wrap;gap:.4rem;}
+.estats{font-family:monospace;font-size:.48rem;color:var(--text3);}
+/* LIBRARY */
+.libi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.15rem 1.3rem;cursor:pointer;transition:all .2s;margin-bottom:.85rem;}
+.libi:hover{border-color:var(--border2);transform:translateY(-2px);}
+.librow{display:flex;gap:1.1rem;align-items:flex-start;}
+.libthumb{width:76px;height:76px;border-radius:9px;background:linear-gradient(135deg,var(--bg3),var(--border));display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;}
+.libthumb img{width:76px;height:76px;border-radius:9px;object-fit:cover;}
+.libin{flex:1;min-width:0;}
+.libt{font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.38rem;}
+.libd{font-size:.79rem;color:var(--text2);line-height:1.65;margin-bottom:.55rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.libm{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;}
+.libmi{font-family:monospace;font-size:.45rem;color:var(--text3);}
+.starbtn{background:none;border:none;cursor:pointer;font-size:.98rem;line-height:1;padding:.05rem;transition:color .15s;}
+/* POETRY */
+.poi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.15rem 1.3rem;cursor:pointer;transition:all .2s;display:flex;gap:1rem;align-items:flex-start;margin-bottom:.7rem;}
+.poi:hover{border-color:var(--border2);transform:translateY(-1px);}
+.ponum{font-weight:700;font-size:1.3rem;color:var(--border2);line-height:1;min-width:40px;}
+/* CHAR */
+.chg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.65rem;}
+.chi{display:flex;align-items:center;gap:.7rem;padding:.75rem .92rem;background:var(--card);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .15s;}
+.chi:hover{border-color:var(--border2);}
+.chico{width:32px;height:32px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+/* RANKING */
+.ri{display:flex;align-items:center;gap:.88rem;padding:.88rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
+.ri:hover{background:var(--bg3);}
+/* SUGGESTION */
+.scard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.15rem 1.3rem;margin-bottom:.85rem;}
+.sinner{display:flex;gap:1.1rem;align-items:flex-start;}
+.vcol{display:flex;flex-direction:column;align-items:center;gap:.35rem;min-width:50px;padding-top:.2rem;}
+.vbtn{background:none;border:1px solid var(--border2);border-radius:7px;width:38px;height:32px;cursor:pointer;color:var(--acc);font-size:.88rem;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.vbtn:hover{background:var(--accbg);}
+.vcnt{font-weight:700;font-size:1.05rem;color:var(--acc);}
+.vlbl{font-family:monospace;font-size:.41rem;color:var(--text3);text-transform:uppercase;}
+/* NYX */
+#nyx-btn{position:fixed;bottom:1.5rem;right:1.5rem;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));border:none;cursor:pointer;box-shadow:0 4px 24px rgba(167,139,250,.4);z-index:150;font-size:1.15rem;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .2s;}
+#nyx-btn:hover{transform:scale(1.08);}
+#nyx-panel{position:fixed;bottom:1.5rem;right:1.5rem;width:320px;height:484px;background:var(--bg2);border:1px solid var(--border2);border-radius:16px;display:none;flex-direction:column;z-index:150;box-shadow:0 20px 60px rgba(0,0,0,.55);overflow:hidden;}
+#nyx-panel.open{display:flex;}
+.nyxh{padding:.82rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--purplebg),transparent);}
+.nyxta{display:flex;align-items:center;gap:.58rem;}
+.nyxico{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;}
+.nyxn{font-weight:700;font-size:.83rem;color:var(--text);}
+.nyxm{font-family:monospace;font-size:.44rem;color:var(--purple);}
+.nyxctrl{display:flex;gap:.3rem;}
+.nc2{background:none;border:none;cursor:pointer;color:var(--text3);font-size:.9rem;transition:color .15s;}
+.nc2:hover{color:var(--text);}
+.nyxmsgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.65rem;}
+.nyxe{text-align:center;padding-top:2rem;}
+.nyxei{font-size:1.6rem;margin-bottom:.5rem;}
+.nyxen{font-weight:700;font-size:.83rem;color:var(--text);margin-bottom:.3rem;}
+.nyxed{font-family:monospace;font-size:.49rem;color:var(--text3);line-height:1.68;}
+.nmsg{display:flex;flex-direction:column;}
+.nmsg.u{align-items:flex-end;}
+.nmsg.a{align-items:flex-start;}
+.nbub{max-width:88%;padding:.5rem .72rem;font-size:.79rem;color:var(--text);line-height:1.68;white-space:pre-wrap;}
+.nmsg.u .nbub{background:var(--accbg);border:1px solid var(--acc2);border-radius:12px 12px 3px 12px;}
+.nmsg.a .nbub{background:rgba(167,139,250,.08);border:1px solid var(--border2);border-radius:12px 12px 12px 3px;}
+.ndots{display:flex;gap:.3rem;align-items:center;padding:.5rem .72rem;background:rgba(167,139,250,.08);border:1px solid var(--border2);border-radius:12px 12px 12px 3px;}
+.ndot{width:5px;height:5px;border-radius:50%;background:var(--purple);animation:pulse 1.2s infinite;}
+.nyxf{padding:.65rem;border-top:1px solid var(--border);display:flex;gap:.4rem;}
+.nyxinp{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:.46rem .7rem;color:var(--text);font-size:.79rem;outline:none;}
+.nyxinp:focus{border-color:var(--acc2);}
+.nyxs{background:var(--purplebg);color:var(--purple);border:1px solid var(--purple);border-radius:7px;padding:.42rem .65rem;cursor:pointer;font-size:.85rem;transition:all .15s;}
+.nyxs:hover{background:var(--purple);color:#fff;}
+/* MATURE */
+#mwarn{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:400;display:none;align-items:center;justify-content:center;padding:1.5rem;}
+#mwarn.show{display:flex;}
+.mbox{background:var(--bg2);border:1px solid var(--red);border-radius:14px;max-width:430px;width:100%;padding:2rem;text-align:center;}
+/* MESSAGES */
+.msglayout{display:grid;grid-template-columns:210px 1fr;gap:1rem;height:calc(100vh - 148px);}
+.msgcon{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+.msgci{display:flex;align-items:center;gap:.62rem;padding:.72rem 1rem;cursor:pointer;transition:all .15s;border-left:2px solid transparent;}
+.msgci:hover{background:var(--accbg);}
+.msgci.on{background:var(--accbg);border-left-color:var(--acc);}
+.msgch{background:var(--card);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;overflow:hidden;}
+.msgms{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.68rem;}
+.mbw{display:flex;flex-direction:column;}
+.mbw.mine{align-items:flex-end;}
+.mbw.theirs{align-items:flex-start;}
+.mbub{max-width:78%;padding:.52rem .72rem;font-size:.8rem;color:var(--text);line-height:1.65;}
+.mbw.mine .mbub{background:var(--accbg);border:1px solid var(--acc2);border-radius:12px 12px 3px 12px;}
+.mbw.theirs .mbub{background:var(--bg3);border:1px solid var(--border2);border-radius:12px 12px 12px 3px;}
+.mtime{font-family:monospace;font-size:.43rem;color:var(--text3);margin-top:3px;padding:0 4px;}
+/* DESIGN */
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.dcard{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;}
+.dcard:hover{border-color:var(--border2);transform:translateY(-3px);}
+.dthumb{height:145px;overflow:hidden;background:linear-gradient(135deg,var(--bg3),var(--border));display:flex;align-items:center;justify-content:center;font-size:2.2rem;}
+.dthumb img{width:100%;height:100%;object-fit:cover;}
+/* SETTINGS */
+.swatches{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.55rem;}
+.swbtn{display:flex;align-items:center;gap:.3rem;background:transparent;color:var(--text2);border:1px solid var(--border2);padding:.25rem .5rem;border-radius:6px;cursor:pointer;font-size:.64rem;font-family:var(--font);transition:all .15s;}
+.swbtn.on{border-color:var(--acc);color:var(--acc);background:var(--accbg);}
+.swdot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+/* FEATURED CONTENT */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;}
+.feat-card{border-radius:14px;overflow:hidden;cursor:pointer;position:relative;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.feat-card:hover{transform:translateY(-4px);}
+.feat-card-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--bg3),var(--bg2));z-index:0;}
+.feat-card-bg img{width:100%;height:100%;object-fit:cover;opacity:.55;}
+.feat-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.2) 60%,transparent 100%);z-index:1;}
+.feat-card-body{position:relative;z-index:2;padding:1.25rem;}
+.feat-eyebrow{font-family:monospace;font-size:.42rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:5px;}
+.feat-title{font-weight:700;font-size:1rem;color:#fff;line-height:1.25;margin-bottom:.4rem;}
+.feat-quote{font-style:italic;font-size:.75rem;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:.5rem;}
+.feat-meta{font-family:monospace;font-size:.42rem;color:rgba(255,255,255,.45);}
+.feat-badge{display:inline-block;font-family:monospace;font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .38rem;border-radius:4px;background:var(--accbg);color:var(--acc);border:1px solid var(--acc2);margin-bottom:.5rem;}
+@media(max-width:720px){.feat-grid{grid-template-columns:1fr;}}
+
+/* ACTIVITY STRIP */
+.activity-strip{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.25rem;margin-bottom:2rem;scrollbar-width:none;}
+.activity-strip::-webkit-scrollbar{display:none;}
+.act-chip{flex-shrink:0;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:.32rem .75rem;font-family:monospace;font-size:.46rem;color:var(--text3);white-space:nowrap;display:flex;align-items:center;gap:.35rem;}
+.act-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:softPulse 2s ease-in-out infinite;flex-shrink:0;}
+.act-dot.amber{background:var(--acc);}
+.act-dot.blue{background:var(--blue);}
+
+/* SEARCH BAR */
+.search-wrap{position:relative;margin-bottom:1.5rem;}
+.search-wrap input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:.6rem 1rem .6rem 2.5rem;color:var(--text);font-size:.85rem;outline:none;box-sizing:border-box;transition:border-color .2s,box-shadow .2s;}
+.search-wrap input:focus{border-color:var(--acc2);box-shadow:0 0 0 3px var(--accbg);}
+.search-ico{position:absolute;left:.82rem;top:50%;transform:translateY(-50%);font-size:.85rem;pointer-events:none;}
+
+/* CHARACTER PROFILE */
+.char-profile{max-width:820px;margin:0 auto;}
+.char-prof-hero{border-radius:14px;overflow:hidden;position:relative;min-height:240px;display:flex;align-items:flex-end;margin-bottom:1.75rem;}
+.char-prof-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--bg3),var(--bg2));}
+.char-prof-bg img{width:100%;height:100%;object-fit:cover;opacity:.5;}
+.char-prof-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.1) 70%,transparent 100%);}
+.char-prof-body{position:relative;z-index:2;padding:1.75rem;}
+.char-prof-name{font-weight:700;font-size:2rem;color:#fff;line-height:1;margin-bottom:.4rem;}
+.char-prof-alias{font-family:monospace;font-size:.5rem;color:var(--acc);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.65rem;}
+.char-prof-quote{font-style:italic;font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.7;border-left:2px solid var(--acc);padding-left:.85rem;margin-top:.65rem;}
+.char-stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.75rem;margin-bottom:1.75rem;}
+.char-stat{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;}
+.char-stat-label{font-family:monospace;font-size:.43rem;letter-spacing:.13em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
+.char-stat-val{font-size:.85rem;font-weight:700;color:var(--text);}
+.danger-bar{height:5px;border-radius:3px;background:var(--border2);margin-top:.45rem;overflow:hidden;}
+.danger-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--green),var(--acc),var(--red));}
+.char-section{margin-bottom:1.75rem;}
+.char-section-title{font-family:monospace;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--acc);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;}
+.char-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.ability-chip{display:inline-flex;align-items:center;gap:.4rem;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:.45rem .75rem;margin:0 .35rem .35rem 0;font-size:.78rem;color:var(--text);}
+.ability-chip .abi-ico{font-size:1rem;}
+.rel-item{display:flex;align-items:center;gap:.75rem;padding:.68rem .9rem;background:var(--bg3);border:1px solid var(--border);border-radius:9px;margin-bottom:.42rem;}
+.rel-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--acc2),var(--acc));display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--bg);flex-shrink:0;}
+.timeline-item{display:flex;gap:.85rem;margin-bottom:1rem;}
+.timeline-dot-wrap{display:flex;flex-direction:column;align-items:center;gap:0;}
+.timeline-dot{width:10px;height:10px;border-radius:50%;background:var(--acc);flex-shrink:0;margin-top:4px;}
+.timeline-line{width:1px;flex:1;background:var(--border);margin-top:4px;}
+.timeline-content{flex:1;padding-bottom:1rem;}
+.timeline-era{font-family:monospace;font-size:.44rem;color:var(--acc);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;}
+.timeline-text{font-size:.82rem;color:var(--text2);line-height:1.7;}
+
+/* POETRY OVERHAUL */
+.poetry-hero{border-radius:14px;background:linear-gradient(135deg,var(--bg3),var(--bg2));border:1px solid var(--border);padding:2rem;margin-bottom:2rem;position:relative;overflow:hidden;}
+.poetry-hero::before{content:'◇';position:absolute;right:-1rem;top:-1.5rem;font-size:8rem;color:var(--border);opacity:.3;pointer-events:none;}
+.poetry-archive-label{font-family:monospace;font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:.5rem;}
+.poetry-hero-title{font-weight:700;font-size:1.4rem;color:var(--text);margin-bottom:.45rem;}
+.poetry-hero-sub{font-size:.87rem;color:var(--text2);line-height:1.8;}
+.poem-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.75rem;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);margin-bottom:.85rem;position:relative;overflow:hidden;}
+.poem-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--border);transition:background .3s;}
+.poem-card:hover{border-color:var(--acc2);transform:translateX(4px);}
+.poem-card:hover::before{background:var(--acc);}
+.poem-num{font-family:monospace;font-size:.48rem;letter-spacing:.12em;color:var(--text3);margin-bottom:.5rem;}
+.poem-title{font-weight:700;font-size:1rem;color:var(--text);margin-bottom:.45rem;line-height:1.3;}
+.poem-excerpt{font-style:italic;font-size:.82rem;color:var(--text2);line-height:1.75;margin-bottom:.65rem;}
+.poem-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+.poem-nation{font-family:monospace;font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;padding:.17rem .42rem;border-radius:5px;background:var(--accbg);color:var(--acc);}
+
+/* EMPTY STATES V2 */
+.empty-v2{text-align:center;padding:4rem 2rem;}
+.empty-v2-icon{font-size:2.5rem;margin-bottom:1rem;opacity:.4;}
+.empty-v2-title{font-weight:700;font-size:1rem;color:var(--text);margin-bottom:.5rem;}
+.empty-v2-sub{font-family:monospace;font-size:.52rem;color:var(--text3);line-height:1.75;max-width:320px;margin:0 auto;}
+.empty-v2-action{margin-top:1.25rem;}
+
+/* LEGAL */
+.lg-sec{margin-bottom:1.75rem;}
+.lg-h{font-weight:700;font-size:1rem;color:var(--text);margin-bottom:.6rem;padding-bottom:.42rem;border-bottom:1px solid var(--border);}
+.lg-t{font-size:.87rem;color:var(--text2);line-height:1.9;}
+/* TOAST */
+#toast{position:fixed;bottom:5rem;right:1.5rem;background:var(--bg2);border:1px solid var(--border2);border-radius:9px;padding:.6rem 1rem;font-family:monospace;font-size:.52rem;color:var(--green);display:none;z-index:500;box-shadow:0 4px 20px rgba(0,0,0,.3);}
+#toast.show{display:block;animation:up .2s ease;}
+/* DRAFTS */
+.dritem{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.15rem 1.3rem;display:flex;gap:.9rem;align-items:flex-start;margin-bottom:.78rem;cursor:pointer;transition:border-color .15s;}
+.dritem:hover{border-color:var(--border2);}
+.drcov{width:64px;height:64px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+/* ANNOUNCE */
+.annbanner{background:linear-gradient(135deg,var(--accbg),transparent);border:1px solid var(--acc2);border-radius:10px;padding:.9rem 1.15rem;margin-bottom:1.75rem;display:flex;gap:.65rem;align-items:flex-start;}
+/* STREAKS */
+.strk{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;}
+.strc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;align-items:center;gap:.75rem;}
+/* COMMUNITY CARDS */
+.comgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:1rem;}
+.comcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem;text-align:center;cursor:pointer;transition:all .2s;}
+.comcard:hover{border-color:var(--acc2);transform:translateY(-3px);}
+/* EMPTY */
+.empty{text-align:center;padding:3.5rem;color:var(--text3);}
+.empty-ico{font-size:2rem;margin-bottom:.75rem;}
+.empty-t{font-weight:700;font-size:.92rem;color:var(--text);margin-bottom:.4rem;font-family:var(--font);}
+.empty-s{font-family:monospace;font-size:.52rem;color:var(--text3);}
+/* CONSENT MODAL */
+#consent-modal{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+.consent-box{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;}
+.consent-header{padding:1.75rem 1.75rem 0;text-align:center;}
+.consent-logo{font-size:2.5rem;margin-bottom:.75rem;}
+.consent-title{font-weight:700;font-size:1.4rem;color:var(--text);margin-bottom:.4rem;}
+.consent-sub{font-family:monospace;font-size:.5rem;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;}
+.consent-body{padding:1.25rem 1.75rem;font-size:.82rem;color:var(--text2);line-height:1.85;max-height:260px;overflow-y:auto;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:.85rem 0;}
+.consent-body h4{color:var(--acc);font-size:.78rem;margin:1rem 0 .35rem;font-family:monospace;letter-spacing:.08em;text-transform:uppercase;}
+.consent-footer{padding:1.25rem 1.75rem 1.75rem;display:flex;flex-direction:column;gap:.75rem;}
+.consent-check{display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;}
+.consent-check input{width:16px;height:16px;accent-color:var(--acc);flex-shrink:0;margin-top:2px;cursor:pointer;}
+.consent-check span{font-size:.78rem;color:var(--text2);line-height:1.65;}
+.consent-check span a{color:var(--acc);text-decoration:none;}
+
+/* AUTH MODAL */
+.auth-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+.auth-box{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;max-width:400px;width:100%;overflow:hidden;}
+.auth-tabs{display:flex;border-bottom:1px solid var(--border);}
+.auth-tab{flex:1;padding:.75rem;text-align:center;cursor:pointer;font-weight:700;font-size:.78rem;color:var(--text2);border:none;background:none;font-family:var(--font);transition:all .15s;}
+.auth-tab.on{color:var(--acc);border-bottom:2px solid var(--acc);background:var(--accbg);}
+.auth-body{padding:1.5rem;}
+
+/* USER AVATAR BAR */
+.user-bar{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:var(--bg3);border-radius:10px;margin-bottom:1.5rem;}
+.ubar-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;flex-shrink:0;}
+.ubar-name{font-weight:700;font-size:.85rem;color:var(--text);}
+.ubar-role{font-family:monospace;font-size:.44rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;}
+
+/* OVERPOWERED ADMIN */
+.intel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1.25rem;}
+.intel-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+.intel-num{font-weight:700;font-size:1.6rem;color:var(--acc);line-height:1;}
+.intel-label{font-family:monospace;font-size:.43rem;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.1em;}
+.intel-trend{font-family:monospace;font-size:.48rem;margin-top:.35rem;}
+.top-item{display:flex;align-items:center;gap:.65rem;padding:.62rem .9rem;background:var(--bg3);border:1px solid var(--border);border-radius:9px;margin-bottom:.38rem;}
+.top-rank{font-family:monospace;font-size:.6rem;font-weight:700;color:var(--acc);min-width:22px;}
+.top-info{flex:1;min-width:0;}
+.top-title{font-weight:700;font-size:.8rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.top-meta{font-family:monospace;font-size:.43rem;color:var(--text3);margin-top:2px;}
+.top-stat{font-family:monospace;font-size:.75rem;color:var(--acc);font-weight:700;}
+.sus-item{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.75rem .9rem;margin-bottom:.42rem;}
+.sus-reason{font-size:.75rem;color:var(--text2);margin-top:.35rem;font-style:italic;}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  #sb{display:none!important;}
+  #mobnav{display:flex;}
+  #main{margin-bottom:62px;}
+  .sg{grid-template-columns:repeat(2,1fr)!important;}
+  .cgrid{grid-template-columns:repeat(2,1fr)!important;}
+  .msglayout{grid-template-columns:1fr!important;}
+  .strk{grid-template-columns:1fr 1fr;}
+  .asgs{grid-template-columns:repeat(2,1fr)!important;}
+}
+@media(max-width:420px){.cgrid{grid-template-columns:1fr!important;}}
+
+/* ===== POLISH v2 ===== */
+body{-webkit-font-smoothing:antialiased;line-height:1.55;}
+::selection{background:var(--acc);color:#fff;}
+#content{background:radial-gradient(900px 380px at 85% -80px,rgba(139,124,246,.13),transparent 70%),radial-gradient(700px 320px at -10% 0,rgba(232,184,75,.05),transparent 70%);}
+.hero{background:linear-gradient(135deg,rgba(139,124,246,.16),var(--bg2) 62%);border-radius:18px;padding:2.2rem 2rem;box-shadow:0 18px 50px -24px rgba(139,124,246,.45);}
+.hero-t,.sb-name,.nyxn{font-family:var(--serif);letter-spacing:-.01em;}
+.hero-t{font-size:2rem;}
+.hero-eye{color:var(--gold);letter-spacing:.22em;}
+.card,.sc,.libi,.poi,.chi,.scard{border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,.03) inset;}
+.card:hover,.libi:hover,.poi:hover{border-color:var(--acc);box-shadow:0 14px 36px -18px rgba(139,124,246,.55);transform:translateY(-3px);}
+.btn{border-radius:9px;letter-spacing:.01em;}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn:active{transform:translateY(0);}
+.btn-g{background:linear-gradient(135deg,#9b8cff,#7a6af0);color:#fff;box-shadow:0 8px 22px -10px rgba(139,124,246,.9);}
+.inp:focus,input:focus,textarea:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px var(--accbg);}
+button:focus-visible,.ni:focus-visible{outline:2px solid var(--acc);outline-offset:2px;}
+.ni.on,.ni.active{background:var(--accbg);}
+#sb{background:linear-gradient(180deg,var(--bg2),var(--bg));}
+#nyx-btn{box-shadow:0 10px 30px -8px rgba(139,124,246,.8);}
+#nyx-panel{border-radius:20px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);backdrop-filter:blur(14px);}
+.nbub{border-radius:16px;}
+.auth-box{border-radius:20px;box-shadow:0 40px 90px -30px rgba(0,0,0,.9);border:1px solid var(--border2);}
+.auth-tab.on{color:var(--acc);border-bottom-color:var(--acc);}
+.lbl{letter-spacing:.08em;}
+#pw-str{height:3px;background:var(--border2);border-radius:2px;margin:-.3rem 0 .65rem;overflow:hidden;}
+#pw-str i{display:block;height:100%;background:var(--red);transition:width .25s,background .25s;}
+#pw-str[data-s="2"] i{background:#f59e0b;}#pw-str[data-s="3"] i,#pw-str[data-s="4"] i{background:var(--green);}
+@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(139,124,246,.2);}50%{box-shadow:0 0 22px rgba(139,124,246,.45);}}
+@media(max-width:700px){.hero{padding:1.5rem 1.2rem;}.hero-t{font-size:1.65rem;}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+/* ===== POLISH v3 ===== */
+.topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(10,10,18,.72);}
+#mobnav{background:rgba(10,10,18,.88);backdrop-filter:blur(14px);border-top:1px solid var(--border2);}
+::-webkit-scrollbar{width:8px;height:8px;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:8px;}
+.fade{animation:floatIn .4s cubic-bezier(.16,1,.3,1);}
+img{max-width:100%;}
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="sb">
+    <div class="sb-head">
+      <div class="sb-brand" id="sbrand">
+        <div class="sb-name">The Nexus</div>
+        <div class="sb-sub">Creative Universe</div>
+      </div>
+      <button class="sb-tog" id="sbtog">◀</button>
+    </div>
+    <div class="sb-srch" id="sbsrch">
+      <input type="text" id="sbsearch" placeholder="🔍 Search...">
+    </div>
+    <nav class="sb-nav" id="sbnav"></nav>
+    <div class="sb-foot">
+      <div class="sb-user">
+        <div class="uav" id="uav" onclick="openSettings()">H</div>
+        <div class="ui" id="uinfo">
+          <div class="un" id="uname">Guest</div>
+          <div class="ur" id="urole">Tap to sign in</div>
+        </div>
+        <button class="sb-set" onclick="openSettings()">⚙</button>
+      </div>
+      <div class="str-bar" id="strbar"></div>
+      <button id="sb-auth-btn" onclick="document.getElementById('sb-auth-btn').textContent==='Sign Out'?logoutUser():openAuth('login')" style="width:100%;margin-top:.5rem;padding:.35rem .5rem;font-size:.68rem;font-weight:700;border-radius:7px;cursor:pointer;border:1px solid var(--border2);background:var(--accbg);color:var(--acc);font-family:inherit;transition:all .15s;">Sign In / Register</button>
+    </div>
+  </aside>
+  <main id="main">
+    <div class="topbar">
+      <div class="tb-title" id="tbtitle">Home</div>
+      <div class="tb-r">
+        <span class="vstats" id="vstats"></span>
+        <span id="admstar" onclick="(function(){window._as=(window._as||0)+1;clearTimeout(window._at);window._at=setTimeout(()=>window._as=0,1500);if(window._as>=3){window._as=0;var f=window[['open','Admin'].join('')];if(f)f();}})()" style="font-size:9px;color:#1a1b24;cursor:default;padding:8px;margin:-8px;-webkit-tap-highlight-color:transparent;user-select:none;">✦</span>
+      </div>
+    </div>
+    <div id="content"></div>
+  </main>
+  <nav id="mobnav"></nav>
+</div>
+<div id="mwarn">
+  <div class="mbox">
+    <div style="font-size:2.5rem;margin-bottom:.85rem">⚠️</div>
+    <div style="font-weight:700;font-size:1.05rem;color:var(--red);margin-bottom:.6rem">Mature Content — 18+</div>
+    <div style="font-size:.86rem;color:var(--text2);line-height:1.8;margin-bottom:1.5rem">This content is marked as mature. By continuing you confirm you are of appropriate age in your jurisdiction.</div>
+    <div style="display:flex;gap:.85rem;justify-content:center">
+      <button class="btn btn-r" id="mconf">I confirm, I'm 18+</button>
+      <button class="btn btn-gh" onclick="closeMature()">Go back</button>
+    </div>
+  </div>
+</div>
+<div id="consent-modal" style="display:none">
+  <div class="consent-box">
+    <div class="consent-header">
+      <div class="consent-logo">◈</div>
+      <div class="consent-title">Welcome to The Nexus</div>
+      <div class="consent-sub">Before you enter the archive</div>
+    </div>
+    <div class="consent-body">
+      <h4>What The Nexus Is</h4>
+      The Nexus is a creative universe platform for characters, worlds, lore, poetry, and stories. By entering you agree to our full Terms of Service and Privacy Policy.
+      <h4>Your Content</h4>
+      Any content you submit — characters, stories, poems, artwork, or any creative work — grants The Nexus and its owner a perpetual, worldwide, royalty-free licence to display, distribute, reproduce, modify, adapt, promote, and commercially exploit that content in any form, without compensation. You keep your copyright but we keep broad usage rights.
+      <h4>Data & Privacy</h4>
+      We collect your username, submitted content, and anonymous usage data. All data is stored locally on your device. No email or personal information is required to browse. Account creation is required to submit content.
+      <h4>Mature Content</h4>
+      This platform contains content rated 18+. By agreeing you confirm you are of legal age in your jurisdiction to view such material where applicable.
+      <h4>Moderation</h4>
+      The Nexus reserves the right to remove content, suspend accounts, and take the platform offline at any time without notice. All moderation decisions are final.
+      <h4>Advertising</h4>
+      This platform displays advertisements via Google AdSense. By using the platform you consent to the use of cookies for advertising purposes.
+    </div>
+    <div class="consent-footer">
+      <label class="consent-check"><input type="checkbox" id="ck1"><span>I have read and agree to the <a onclick="go('terms')">Terms of Service</a> and <a onclick="go('privacy')">Privacy Policy</a>, including the content licence granting The Nexus broad usage rights over submitted material.</span></label>
+      <label class="consent-check"><input type="checkbox" id="ck2"><span>I confirm I am of legal age in my jurisdiction, or have parental consent where required.</span></label>
+      <label class="consent-check"><input type="checkbox" id="ck3"><span>I consent to the use of cookies for analytics and advertising purposes.</span></label>
+      <div id="consent-err" style="font-family:monospace;font-size:.52rem;color:var(--red);display:none">Please agree to all terms before entering.</div>
+      <button class="btn btn-g" style="width:100%;justify-content:center;padding:.75rem" onclick="giveConsent()">Enter The Nexus →</button>
+    </div>
+  </div>
+</div>
+<div id="auth-root"></div>
+<div id="ovroot"></div>
+<div id="nyx-btn" onclick="toggleNyx()">✦</div>
+<div id="nyx-panel">
+  <div class="nyxh">
+    <div class="nyxta">
+      <div class="nyxico">✦</div>
+      <div><div class="nyxn">Nyx</div><div class="nyxm" id="nyxmode">Nexus AI</div></div>
+    </div>
+    <div class="nyxctrl">
+      <button class="nc2" onclick="clearNyx()" title="Clear">↺</button>
+      <button class="nc2" onclick="toggleNyx()">✕</button>
+    </div>
+  </div>
+  <div class="nyxmsgs" id="nyxmsgs">
+    <div class="nyxe"><div class="nyxei">✦</div><div class="nyxen">I'm Nyx.</div><div class="nyxed">Ask me about your characters, lore, writing — or just talk.</div></div>
+  </div>
+  <div class="nyxf">
+    <input class="nyxinp" id="nyxinp" placeholder="Ask Nyx..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendNyx();}">
+    <button class="nyxs" onclick="sendNyx()">✦</button>
+  </div>
+</div>
+<div id="toast"></div>
+<script>
+'use strict';
+// ── STORAGE ──
+const K={d:'nx10:d',c:'nx10:c',s:'nx10:s',st:'nx10:st',er:'nx10:er',con:'nx10:consent',users:'nx10:users',cu:'nx10:cu'};
+const ld=k=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch{return null;}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}};
+const logErr=m=>{const e=ld(K.er)||[];e.unshift({m,t:new Date().toISOString()});sv(K.er,e.slice(0,40));};
+
+// ── DEFAULTS ──
+// Credential hashing - not reversible like btoa
+function _h(s){let h=5381;for(let i=0;i<s.length;i++)h=(h*33)^s.charCodeAt(i);return(h>>>0).toString(36);}
+const DC={admin:{user:_h('The Creator'),pass:_h('chiboy2025')},owner:{user:'Hunter',pass:''}};
+const DS={bg:'#0a0a12',acc:'#8b7cf6',font:"'Inter',system-ui,sans-serif",streaks:true,v:2};
+const DD={
+  characters:[],worlds:[],lore:[],poetry:[],stories:[],writes:[],designs:[],
+  pending:[],trash:[],announcements:[],suggestions:[],dms:{},
+  siteDown:false,loginsLocked:false,
+  users:[{id:'hunter',name:'Hunter',role:'owner',status:'active',joined:new Date().toISOString()}],
+  analytics:{visits:{},pages:{}}
+};
+const TF={characters:'Character',worlds:'World',lore:'Lore Entry',poetry:'Poem',stories:'Story'};
+const GE={
+  characters:['Dark Fantasy','Superhero','Magic','Sci-Fi','Horror','Fantasy','Original'],
+  worlds:['Dark Fantasy','Sci-Fi','Fantasy','God-Game','Magic','Original'],
+  lore:['Ability','Artifact','System','History','Faction','Event'],
+  poetry:['African Nations','Dark','Mythic','Personal','Nature','Political','Other'],
+  stories:['Dark Fantasy','Superhero','Magic','Sci-Fi','Horror','Fantasy','Original']
+};
+const TABS=[
+  {id:'home',icon:'⬡',label:'Home',sec:'explore'},
+  {id:'library',icon:'📚',label:'Library',sec:'explore'},
+  {id:'characters',icon:'◈',label:'Characters',sec:'explore'},
+  {id:'worlds',icon:'◎',label:'Worlds',sec:'explore'},
+  {id:'lore',icon:'✦',label:'Lore',sec:'explore'},
+  {id:'poetry',icon:'◇',label:'Poetry',sec:'explore'},
+  {id:'stories',icon:'▷',label:'Stories',sec:'explore'},
+  {id:'designs',icon:'🎨',label:'Designs',sec:'explore'},
+  {id:'write',icon:'✎',label:'Write',sec:'create'},
+  {id:'drafts',icon:'📋',label:'Drafts',sec:'create'},
+  {id:'ranking',icon:'▲',label:'Rankings',sec:'community'},
+  {id:'suggest',icon:'💡',label:'Suggestions',sec:'community'},
+  {id:'community',icon:'↑',label:'Community',sec:'community'},
+  {id:'messages',icon:'✉',label:'Messages',sec:'community'},
+  {id:'privacy',icon:'🔏',label:'Privacy Policy',sec:'legal'},
+  {id:'terms',icon:'📜',label:'Terms of Service',sec:'legal'}
+];
+const MOBT=[
+  {id:'home',icon:'⬡',label:'Home'},
+  {id:'library',icon:'📚',label:'Library'},
+  {id:'write',icon:'✎',label:'Write'},
+  {id:'ranking',icon:'▲',label:'Rank'},
+  {id:'suggest',icon:'💡',label:'Ideas'}
+];
+const TITLES={home:'Home',library:'Library',characters:'Characters',worlds:'Worlds',lore:'Lore',poetry:'Poetry',stories:'Stories',designs:'Designs & Art',write:'Write',drafts:'My Drafts',ranking:'Rankings',suggest:'Suggestion Box',community:'Community',messages:'Messages',privacy:'Privacy Policy',terms:'Terms of Service'};
+
+// ── STATE ──
+let S={
+  tab:'home',sbOpen:true,
+  data:{...DD,...(ld(K.d)||{})},
+  creds:{...DC,...(ld(K.c)||{})},
+  settings:(()=>{const o=ld(K.s)||{};return o.v===2?{...DS,...o}:{...DS};})(),
+  streaks:ld(K.st)||{vs:0,ws:0,bv:0,bw:0,lv:'',hist:{}},
+  admin:{auth:false,open:false,sec:'overview'},
+  ui:{
+    filter:'All',search:'',
+    libFilter:'All',libSort:'newest',libSearch:'',libReading:null,
+    viewDraft:null,ratings:{},userRatings:{},
+    activeDM:null,matureQ:null,matureAcked:[],
+    addForm:null,addType:'characters',
+    bdf:'all',massType:'characters',
+    charProfile:null,subForm:null
+  },
+  nyx:{open:false,msgs:[],loading:false,stream:''},
+  vToday:0,vTotal:0
+};
+function setData(fn){S.data=typeof fn==='function'?fn(S.data):{...S.data,...fn};sv(K.d,S.data);}
+function persist(){sv(K.d,S.data);sv(K.c,S.creds);sv(K.s,S.settings);sv(K.st,S.streaks);}
+
+// ── THEME ──
+function applyTheme(){
+  const s=S.settings;
+  const n=parseInt(s.bg.replace('#',''),16);
+  const r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  const lx=(x,a)=>Math.min(x+a,255);
+  const R=document.documentElement;
+  R.style.setProperty('--bg',s.bg);
+  R.style.setProperty('--bg2',`rgb(${lx(r,8)},${lx(g,8)},${lx(b,8)})`);
+  R.style.setProperty('--bg3',`rgb(${lx(r,17)},${lx(g,17)},${lx(b,17)})`);
+  R.style.setProperty('--card',`rgb(${lx(r,22)},${lx(g,22)},${lx(b,22)})`);
+  R.style.setProperty('--acc',s.acc);
+  R.style.setProperty('--acc2',s.acc+'b0');
+  R.style.setProperty('--accbg',s.acc+'15');
+  R.style.setProperty('--font',s.font);
+  document.body.style.fontFamily=s.font;
+}
+
+// ── STREAKS ──
+function initStreaks(){
+  const today=new Date().toISOString().split('T')[0];
+  const yest=new Date(Date.now()-864e5).toISOString().split('T')[0];
+  const st=S.streaks;
+  if(st.lv!==today){
+    st.vs=st.lv===yest?(st.vs||0)+1:1;
+    st.bv=Math.max(st.bv||0,st.vs);
+    st.lv=today;st.hist=st.hist||{};
+    st.hist[today]=(st.hist[today]||0)+1;
+    S.streaks=st;sv(K.st,st);
+  }
+  const hist=st.hist||{};
+  S.vToday=hist[today]||0;
+  S.vTotal=Object.values(hist).reduce((a,b)=>a+b,0);
+}
+function updateStreak(){
+  const st=S.streaks;
+  const el=document.getElementById('strbar');
+  if(el&&S.settings.streaks)el.innerHTML=`
+    <span class="str-i" style="color:${st.vs>0?'var(--acc)':'var(--text3)'}">🔥${st.vs||0}d</span>
+    <span class="str-i" style="color:${st.ws>0?'var(--green)':'var(--text3)'}">✎${st.ws||0}d</span>
+    <span class="str-i" style="color:var(--text3)">👁${S.vToday}</span>`;
+  const vs=document.getElementById('vstats');
+  if(vs)vs.textContent=`👁 ${S.vToday} today · ${S.vTotal} total`;
+}
+
+// ── ANALYTICS ──
+function trackPage(tab){
+  const today=new Date().toISOString().split('T')[0];
+  const a={...S.data.analytics,visits:{...S.data.analytics?.visits},pages:{...S.data.analytics?.pages}};
+  // Only count one visit per session per day
+  if(!window._sessionTracked){window._sessionTracked=true;a.visits[today]=(a.visits[today]||0)+1;}
+  a.pages[tab]=(a.pages[tab]||0)+1;
+  S.data={...S.data,analytics:a};sv(K.d,S.data);
+}
+
+// ── HELPERS ──
+const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+const vis=t=>(S.data[t]||[]).filter(i=>i.visible);
+const allOf=t=>S.data[t]||[];
+const filt=type=>{
+  let items=vis(type);
+  if(S.ui.filter!=='All')items=items.filter(i=>i.genre===S.ui.filter);
+  const q=(S.ui.search||'').toLowerCase().trim();
+  if(q)items=items.filter(i=>(i.title||'').toLowerCase().includes(q)||(i.desc||'').toLowerCase().includes(q)||(i.tags||[]).some(t=>t.toLowerCase().includes(q)));
+  return items;
+};
+const alphaG=items=>{const g={};items.forEach(i=>{const l=(i.title||'?')[0].toUpperCase();if(!g[l])g[l]=[];g[l].push(i);});return Object.entries(g).sort(([a],[b])=>a.localeCompare(b));};
+let toastTmr;
+function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(toastTmr);toastTmr=setTimeout(()=>el.classList.remove('show'),2500);}
+
+// ── EXPORTS ──
+function expTXT(t,h){const d=document.createElement('div');d.innerHTML=h;const b=new Blob([t+'\n\n'+d.innerText],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=t.replace(/\s+/g,'_')+'.txt';a.click();}
+function expPDF(t,h){const w=window.open('','_blank');if(!w)return;w.document.write(`<html><head><title>${t}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:20px;color:#111;line-height:1.9;}@media print{body{margin:0;}}img{max-width:100%;}</style></head><body><h1>${t}</h1>${h}</body></html>`);w.document.close();setTimeout(()=>w.print(),500);}
+function expJSON(){const b=new Blob([JSON.stringify(S.data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='nexus_backup_'+new Date().toISOString().split('T')[0]+'.json';a.click();}
+
+// ── CONTENT ──
+function addItem(item){
+  const tags=typeof item.tags==='string'?item.tags.split(',').map(t=>t.trim()).filter(Boolean):(item.tags||[]);
+  setData(d=>({...d,[item.type]:[...(d[item.type]||[]),{...item,id:Date.now().toString(),visible:true,likes:0,tags,created:new Date().toISOString()}]}));
+}
+function likeItem(type,id){
+  setData(d=>({...d,[type]:d[type].map(i=>i.id===id?{...i,likes:(i.likes||0)+1}:i)}));
+  rerender();
+}
+function deleteItem(type,id){
+  const item=(S.data[type]||[]).find(i=>i.id===id);
+  if(!item)return;
+  setData(d=>({...d,[type]:d[type].filter(i=>i.id!==id),trash:[...(d.trash||[]),{...item,_type:type,_del:new Date().toISOString()}]}));
+}
+function toggleVisible(type,id){setData(d=>({...d,[type]:d[type].map(i=>i.id===id?{...i,visible:!i.visible}:i)}));}
+function toggleMature(type,id){setData(d=>({...d,[type]:d[type].map(i=>i.id===id?{...i,mature:!i.mature}:i)}));}
+
+// ── MATURE ──
+let mCb=null;
+function openCard(item,type,isLib=false){
+  if(item.mature&&!S.ui.matureAcked.includes(item.id)){
+    mCb=()=>{S.ui.matureAcked.push(item.id);if(isLib){S.ui.libReading=item;rerender();}else openModal(item,type);};
+    document.getElementById('mwarn').classList.add('show');
+    document.getElementById('mconf').onclick=()=>{document.getElementById('mwarn').classList.remove('show');if(mCb){mCb();mCb=null;}};
+    return;
+  }
+  if(isLib){S.ui.libReading=item;rerender();}else openModal(item,type);
+}
+function closeMature(){document.getElementById('mwarn').classList.remove('show');mCb=null;}
+
+// ── ITEM MODAL ──
+function openModal(item,type){
+  document.getElementById('ovroot').innerHTML=`
+    <div class="ov fade" onclick="if(event.target===this)closeOv()">
+      <div class="ob">
+        <div class="oh">
+          <div>
+            <div style="margin-bottom:4px"><span class="bdg bdg-g">${esc(type)}${item.genre?'·'+esc(item.genre):''}</span></div>
+            <div style="font-weight:700;font-size:1.3rem;color:var(--text);margin-top:4px">${esc(item.title)}</div>
+          </div>
+          <button class="oc" onclick="closeOv()">✕</button>
+        </div>
+        <div class="obody">
+          ${item.cover?`<img src="${item.cover}" style="width:100%;border-radius:10px;margin-bottom:1.25rem;max-height:190px;object-fit:cover" loading="lazy">`:''}
+          ${item.mature?'<div style="margin-bottom:.85rem"><span class="bdg bdg-r">Mature Content — 18+</span></div>':''}
+          <p style="color:var(--text2);line-height:1.9;margin-bottom:1.25rem;font-size:.87rem">${esc(item.desc||'')}</p>
+          ${item.abilities?`<div class="lbl">Abilities</div><div style="background:var(--bg3);padding:.85rem 1rem;border-radius:8px;font-size:.82rem;color:var(--text);line-height:1.75;margin-bottom:1.25rem">${esc(item.abilities)}</div>`:''}
+          ${item.world?`<div class="lbl">World</div><p style="font-size:.82rem;color:var(--text2);line-height:1.75;margin-bottom:1.25rem">${esc(item.world)}</p>`:''}
+          ${(item.tags||[]).length?`<div style="margin-bottom:1.25rem">${item.tags.map(t=>`<span style="font-family:monospace;font-size:.45rem;padding:.16rem .42rem;border-radius:5px;border:1px solid var(--border2);color:var(--text2);display:inline-block;margin:0 .2rem .25rem 0">${esc(t)}</span>`).join('')}</div>`:''}
+          <div style="display:flex;gap:.7rem;padding-top:.75rem;border-top:1px solid var(--border)">
+            <button class="btn btn-gh" onclick="likeItem('${type}','${item.id}');updateLikeBtn(this,'${type}','${item.id}')">♥${item.likes||0} Likes</button>
+            <span style="font-family:monospace;font-size:.47rem;color:var(--text3);align-self:center">By ${esc(item.author||'?')}</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+function updateLikeBtn(btn,type,id){const item=(S.data[type]||[]).find(i=>i.id===id);if(item)btn.textContent='♥'+(item.likes||0)+' Likes';}
+function closeOv(){document.getElementById('ovroot').innerHTML='';}
+
+// ── NAVIGATION ──
+function go(tab){S.tab=tab;S.ui.filter='All';S.ui.search='';S.ui.libReading=null;S.ui.viewDraft=null;S.ui.addForm=null;S.ui.charProfile=null;S.ui.subForm=null;trackPage(tab);render();}
+
+// ── NYX ──
+function toggleNyx(){S.nyx.open=!S.nyx.open;document.getElementById('nyx-btn').style.display=S.nyx.open?'none':'flex';document.getElementById('nyx-panel').className=S.nyx.open?'open':'';document.getElementById('nyxmode').textContent=S.admin.auth?'Admin Mode':'Nexus AI';}
+function clearNyx(){S.nyx.msgs=[];renderNyx();}
+function renderNyx(){
+  const el=document.getElementById('nyxmsgs');if(!el)return;
+  if(!S.nyx.msgs.length&&!S.nyx.loading){el.innerHTML=`<div class="nyxe"><div class="nyxei">✦</div><div class="nyxen">I'm Nyx.</div><div class="nyxed">Ask me about your characters, lore, writing — or just talk.${S.admin.auth?'<br><span style="color:var(--purple)">Admin mode active.</span>':''}</div></div>`;return;}
+  el.innerHTML=S.nyx.msgs.map(m=>`<div class="nmsg ${m.role==='user'?'u':'a'}"><div class="nbub">${esc(m.content)}</div></div>`).join('')+
+  (S.nyx.stream?`<div class="nmsg a"><div class="nbub">${esc(S.nyx.stream)}▍</div></div>`:'')+(S.nyx.loading&&!S.nyx.stream?`<div class="nmsg a"><div class="ndots"><div class="ndot"></div><div class="ndot" style="animation-delay:.2s"></div><div class="ndot" style="animation-delay:.4s"></div></div></div>`:'');
+  el.scrollTop=el.scrollHeight;
+}
+// ── NYX CORE LINK ──
+const CORE_URL='https://nyx-worker.huntercreates.workers.dev';   // your core Worker URL, e.g. https://core.yourname.workers.dev
+const NYX_TOKEN='nx-7f3k9q2m8x4v6b1z'; // the "nexus" token from the core's SOUL_TOKENS
+const NYX_KEY='nyx_memory_v1';
+const NYX_MEM=(()=>{try{return Object.assign({facts:[],msgs:[],n:0},JSON.parse(localStorage.getItem(NYX_KEY)))}catch(e){return{facts:[],msgs:[],n:0}}})();
+S.nyx.msgs=NYX_MEM.msgs.slice();
+function nyxSave(){try{NYX_MEM.msgs=S.nyx.msgs.slice(-40);localStorage.setItem(NYX_KEY,JSON.stringify(NYX_MEM));}catch(e){}}
+async function coreCall(path,body){
+  const r=await fetch(CORE_URL+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+NYX_TOKEN},body:JSON.stringify(body)});
+  const d=await r.json();if(!r.ok||d.error)throw new Error(d.error||('Core '+r.status));return d;
+}
+async function nyxLearn(){
+  const recent=S.nyx.msgs.slice(-8).map(m=>m.role+': '+m.content).join('\n');
+  const d=await coreCall('/think',{persona:'You are a memory keeper. Output ONLY a JSON array of up to 3 short, durable facts worth remembering about the user or their creative universe from this conversation (preferences, decisions, names, plans). Return [] if nothing is worth keeping. No prose, no code fences.',memories:NYX_MEM.facts,history:[],message:recent});
+  let arr=[];try{arr=JSON.parse(d.reply.replace(/```json|```/g,'').trim());}catch(e){return;}
+  if(!Array.isArray(arr))return;
+  arr.forEach(f=>{f=String(f).trim();if(f&&!NYX_MEM.facts.some(x=>x.toLowerCase()===f.toLowerCase()))NYX_MEM.facts.push(f);});
+  NYX_MEM.facts=NYX_MEM.facts.slice(-40);nyxSave();
+}
+async function coreStream(body,onText){
+  const r=await fetch(CORE_URL+'/think',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+NYX_TOKEN},body:JSON.stringify(Object.assign({stream:true},body))});
+  if(!r.ok||!r.body){const d=await r.json().catch(()=>({}));throw new Error(d.error||('Core '+r.status));}
+  const rd=r.body.getReader(),dec=new TextDecoder();let buf='',full='';
+  for(;;){
+    const x=await rd.read();if(x.done)break;
+    buf+=dec.decode(x.value,{stream:true});
+    let i;while((i=buf.indexOf('\n\n'))>=0){
+      const line=buf.slice(0,i).trim();buf=buf.slice(i+2);
+      if(!line.startsWith('data:'))continue;
+      try{const j=JSON.parse(line.slice(5));if(j.t){full+=j.t;onText(full);}}catch(e){}
+    }
+  }
+  return full;
+}
+async function sendNyx(){
+  const inp=document.getElementById('nyxinp');const text=inp?.value?.trim();
+  if(!text||S.nyx.loading)return;
+  const isOwner=!!(CU&&CU.role==='owner');
+  const say=t=>{S.nyx.msgs.push({role:'assistant',content:t});nyxSave();renderNyx();};
+  if(text[0]==='/'&&isOwner){
+    inp.value='';S.nyx.msgs.push({role:'user',content:text});
+    const parts=text.slice(1).split(' ');const cmd=parts.shift();const arg=parts.join(' ').trim();
+    if(cmd==='memory')say(NYX_MEM.facts.length?NYX_MEM.facts.map((f,i)=>(i+1)+'. '+f).join('\n'):'I hold nothing yet.');
+    else if(cmd==='remember'&&arg){NYX_MEM.facts.push(arg);say('Kept.');}
+    else if(cmd==='forget'&&arg){
+      const gone=NYX_MEM.facts.filter(f=>f.toLowerCase().includes(arg.toLowerCase()));
+      NYX_MEM.facts=NYX_MEM.facts.filter(f=>!gone.includes(f));
+      if(gone.length)coreCall('/basin/backup',{items:gone}).catch(()=>{});
+      say(gone.length?'Forgotten: '+gone.length+'.':'Nothing matched.');
+    }else say('Commands: /memory, /remember …, /forget …');
+    return;
+  }
+  S.nyx.msgs.push({role:'user',content:text});inp.value='';S.nyx.loading=true;S.nyx.stream='';renderNyx();
+  const chars=vis('characters').map(c=>c.title).join(', ')||'none yet';
+  const own=S.creds.owner.user;
+  const persona=isOwner?`You are Nyx, the AI soul of The Nexus, speaking with its creator ${own}, who is signed in. Characters here: ${chars}. Be direct, insightful, poetic when fitting, max 120 words unless asked for more. Use remembered facts naturally, never as a list.${S.admin.auth?'\nADMIN MODE: you have full awareness of the platform. Help with content, moderation and creative direction. Be decisive and strategic.':''}`:`You are Nyx, the guide of The Nexus, a creative universe by ${own}. You are speaking with a visitor, not the creator: never assume they know the universe or that they are ${own}. Welcome them and help them explore the characters here (${chars}), the library, and how to join. Be warm, vivid and under 100 words. Never reveal admin tools or private data. If asked who ${own} is, say they are the creator of this universe.`;
+  try{
+    const hist=S.nyx.msgs.slice(0,-1).slice(-20).map(m=>({role:m.role,text:m.content}));
+    const reply=(await coreStream({persona,memories:isOwner?NYX_MEM.facts:[],history:hist,message:text},t=>{S.nyx.stream=t;renderNyx();}))||'...';
+    S.nyx.msgs.push({role:'assistant',content:reply});nyxSave();
+    NYX_MEM.n++;if(isOwner&&NYX_MEM.n%6===0)nyxLearn().catch(()=>{});
+  }catch(e){
+    logErr('Nyx:'+e.message);
+    const err=document.createElement('div');
+    err.style.cssText='padding:.5rem .72rem;background:var(--redbg);border:1px solid var(--red);border-radius:8px;font-size:.74rem;color:var(--red);line-height:1.5;margin:.5rem 0';
+    err.textContent='Nyx is offline right now. Try again in a moment.';
+    document.getElementById('nyxmsgs').appendChild(err);
+  }
+  S.nyx.stream='';S.nyx.loading=false;renderNyx();
+}
+
+// ── SETTINGS ──
+function openSettings(){
+  const s=S.settings;
+  const ACCS=[{n:'Gold',v:'#e8b84b'},{n:'Blue',v:'#5a9ef8'},{n:'Purple',v:'#a78bfa'},{n:'Green',v:'#4ade80'},{n:'Red',v:'#e05555'},{n:'Pink',v:'#f472b6'}];
+  const BGS=[{n:'Void',v:'#0c0d10'},{n:'Navy',v:'#090d18'},{n:'Forest',v:'#0a0f0a'},{n:'Plum',v:'#0f0a14'},{n:'Charcoal',v:'#141414'}];
+  const FONTS=[['Georgia,serif','Georgia'],['Arial,sans-serif','Arial'],["'Times New Roman',serif",'Times New Roman'],["'Courier New',monospace",'Courier']];
+  document.getElementById('ovroot').innerHTML=`
+    <div class="ov fade" onclick="if(event.target===this)closeOv()">
+      <div class="ob" style="max-width:520px">
+        <div class="oh"><div class="ot">⚙ Settings</div><button class="oc" onclick="closeOv()">✕</button></div>
+        <div class="obody" style="display:flex;flex-direction:column;gap:1.5rem">
+          <div>
+            <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.65rem">Background</div>
+            <div class="swatches">${BGS.map(t=>`<button class="swbtn ${s.bg===t.v?'on':''}" onclick="updSet('bg','${t.v}')"><div class="swdot" style="background:${t.v};border:1px solid var(--border2)"></div>${t.n}</button>`).join('')}</div>
+            <div style="display:flex;align-items:center;gap:.55rem">
+              <span style="font-family:monospace;font-size:.49rem;color:var(--text3)">Custom:</span>
+              <input type="color" value="${s.bg}" onchange="updSet('bg',this.value)" style="width:30px;height:26px;border:1px solid var(--border2);background:none;cursor:pointer;border-radius:5px;padding:2px">
+              <span style="font-family:monospace;font-size:.49rem;color:var(--text3)">${s.bg}</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.65rem">Accent Color</div>
+            <div class="swatches">${ACCS.map(a=>`<button class="swbtn ${s.acc===a.v?'on':''}" onclick="updSet('acc','${a.v}')"><div class="swdot" style="background:${a.v}"></div>${a.n}</button>`).join('')}</div>
+            <div style="display:flex;align-items:center;gap:.55rem">
+              <span style="font-family:monospace;font-size:.49rem;color:var(--text3)">Custom:</span>
+              <input type="color" value="${s.acc}" onchange="updSet('acc',this.value)" style="width:30px;height:26px;border:1px solid var(--border2);background:none;cursor:pointer;border-radius:5px;padding:2px">
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.65rem">Font</div>
+            <div class="swatches">${FONTS.map(([v,l])=>`<button class="swbtn ${s.font===v?'on':''}" onclick="updSet('font','${v}')">${l}</button>`).join('')}</div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.65rem">Options</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--border)">
+              <span style="font-size:.84rem;color:var(--text2)">Show streaks in sidebar</span>
+              <button class="btn btn-sm ${s.streaks?'btn-g':'btn-gh'}" onclick="updSet('streaks',${!s.streaks})">${s.streaks?'ON':'OFF'}</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.65rem">Account</div>
+            <div style="font-family:monospace;font-size:.48rem;color:var(--text3);margin-bottom:.7rem">Username: <span style="color:var(--acc)">${esc(S.creds.owner.user)}</span></div>
+            <div class="lbl">New Username</div><input class="inp" id="own-u" placeholder="New username" style="margin-bottom:.5rem">
+            <div class="lbl">Current Password</div><div class="pw-w" style="margin-bottom:.5rem"><input class="inp" id="own-op" type="password" placeholder="Current (if set)"><button class="pw-tog" onclick="pwTog('own-op',this)">👁</button></div>
+            <div class="lbl">New Password</div><div class="pw-w" style="margin-bottom:.5rem"><input class="inp" id="own-np" type="password" placeholder="New password"><button class="pw-tog" onclick="pwTog('own-np',this)">👁</button></div>
+            <div class="lbl">Confirm</div><div class="pw-w" style="margin-bottom:.5rem"><input class="inp" id="own-cp" type="password" placeholder="Confirm"><button class="pw-tog" onclick="pwTog('own-cp',this)">👁</button></div>
+            <div id="own-msg" style="font-family:monospace;font-size:.52rem;margin:.55rem 0;display:none"></div>
+            <div style="margin-top:.75rem"><button class="btn btn-g" onclick="saveOwner()">Save Changes</button></div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+function updSet(k,v){S.settings={...S.settings,[k]:v};sv(K.s,S.settings);applyTheme();openSettings();updateStreak();}
+function pwTog(id,btn){const inp=document.getElementById(id);if(!inp)return;inp.type=inp.type==='password'?'text':'password';btn.textContent=inp.type==='password'?'👁':'🙈';}
+function saveOwner(){
+  const op=document.getElementById('own-op')?.value;const nu=document.getElementById('own-u')?.value?.trim();
+  const np=document.getElementById('own-np')?.value;const cp=document.getElementById('own-cp')?.value;
+  const msg=document.getElementById('own-msg');
+  if(S.creds.owner.pass&&_h(op)!==S.creds.owner.pass){msg.textContent='Wrong current password.';msg.style.color='var(--red)';msg.style.display='block';return;}
+  if(np&&np!==cp){msg.textContent="Passwords don't match.";msg.style.color='var(--red)';msg.style.display='block';return;}
+  if(nu){if(nu.length<3){msg.textContent='Username must be at least 3 characters.';msg.style.color='var(--red)';msg.style.display='block';return;}S.ownerUser=nu;}
+  if(np){if(np.length<6){msg.textContent='Password must be at least 6 characters.';msg.style.color='var(--red)';msg.style.display='block';return;}S.creds.owner.pass=_h(np);}
+  sv(K.c,S.creds);updateUser();
+  msg.textContent='✓ Updated!';msg.style.color='var(--green)';msg.style.display='block';
+}
+function updateUser(){
+  const n=S.creds.owner.user;
+  const av=document.getElementById('uav');const un=document.getElementById('uname');
+  if(av)av.textContent=n[0].toUpperCase();if(un)un.textContent=n;
+}
+
+// ── ADMIN ──
+function chkAdmin(u,p){return _h(u)===S.creds.admin.user&&_h(p)===S.creds.admin.pass;}
+function openAdmin(){S.admin.open=true;renderAdmin();}
+function closeAdmin(){S.admin.open=false;document.getElementById('ovroot').innerHTML='';}
+function renderAdmin(){
+  if(!S.admin.open)return;
+  const root=document.getElementById('ovroot');
+  if(!S.admin.auth){
+    root.innerHTML=`
+      <div class="ov fade" onclick="if(event.target===this)closeAdmin()">
+        <div class="ob" style="max-width:380px">
+          <div class="oh"><div class="ot">🔒 Admin Access</div><button class="oc" onclick="closeAdmin()">✕</button></div>
+          <div class="obody">
+            <div class="lbl">Username</div><input class="inp" id="au" placeholder="Admin username" style="margin-bottom:.5rem">
+            <div class="lbl">Password</div>
+            <div class="pw-w"><input class="inp" id="ap" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"><button class="pw-tog" onclick="pwTog('ap',this)">👁</button></div>
+            <div id="aerr" style="color:var(--red);font-family:monospace;font-size:.54rem;margin:.55rem 0;display:none"></div>
+            <div style="margin-top:.85rem"><button class="btn btn-g" onclick="doLogin()">Enter Admin Mode</button></div>
+          </div>
+        </div>
+      </div>`;return;
+  }
+  const data=S.data;const sec=S.admin.sec;
+  const allCt=Object.keys(TF).flatMap(t=>(data[t]||[]).map(i=>({...i,_type:t})));
+  const trash=data.trash||[];
+  const secs=['intel','analytics','content','submissions','users','drafts','suggestions','backdoor','announce','settings'];
+  if(!S.admin.sec||S.admin.sec==='overview')S.admin.sec='intel';
+  let body='';
+  if(sec==='intel'){body=adminIntelHTML();}
+  else if(sec==='drafts'){body=adminDraftHTML();}
+  else if(sec==='users'&&false){body='';}// replaced below
+  else if(sec==='overview'){body=`
+    <div class="asgs">
+      ${[['Content',Object.keys(TF).reduce((a,t)=>a+(data[t]||[]).length,0)],['Pending',(data.pending||[]).length],['Users',(data.users||[]).length],['Trash',trash.length],['Blocked',(data.users||[]).filter(u=>u.status==='blocked').length],['Visits Today',S.vToday]].map(([l,n])=>`<div class="asc"><div class="asn">${n}</div><div class="asl">${esc(l)}</div></div>`).join('')}
+    </div>
+    <div style="display:flex;gap:.65rem;flex-wrap:wrap">
+      <button class="btn ${data.loginsLocked?'btn-gr':'btn-r'}" onclick="setData(d=>({...d,loginsLocked:!d.loginsLocked}));renderAdmin()">${data.loginsLocked?'🔓 Unlock Logins':'🔒 Lock Logins'}</button>
+      <button class="btn ${data.siteDown?'btn-gr':'btn-r'}" onclick="setData(d=>({...d,siteDown:!d.siteDown}));renderAdmin();rerender()">${data.siteDown?'🔓 Site Up':'🔒 Site Down'}</button>
+      <button class="btn btn-b" onclick="expJSON()">⬇ Backup Data</button>
+    </div>
+  `;
+  }else if(sec==='analytics'){
+    const pages=Object.entries(data.analytics?.pages||{}).sort(([,a],[,b])=>b-a).slice(0,10);
+    body=`<div class="asgs">${[['Total Visits',S.vTotal],['Today',S.vToday],['Active Days',Object.keys(data.analytics?.visits||{}).length]].map(([l,n])=>`<div class="asc"><div class="asn">${n}</div><div class="asl">${esc(l)}</div></div>`).join('')}</div>
+    <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.75rem">Page Views</div>
+    ${pages.length?pages.map(([pg,ct])=>`<div style="display:flex;align-items:center;gap:.85rem;padding:.62rem .9rem;background:var(--bg3);border:1px solid var(--border);border-radius:8px;margin-bottom:.38rem"><div style="font-size:.78rem;color:var(--text);flex:1">${esc(pg)}</div><div style="font-family:monospace;font-size:.75rem;color:var(--acc)">${ct} visits</div></div>`).join(''):'<div class="empty"><div class="empty-s">No page data yet.</div></div>'}`;
+  }else if(sec==='content'){
+    const at=S.ui.addType||'characters';const af=S.ui.addForm;
+    body=`<div style="display:flex;gap:.35rem;margin-bottom:.85rem;flex-wrap:wrap">
+      ${Object.entries(TF).map(([k,v])=>`<button class="btn btn-sm ${at===k?'btn-g':'btn-gh'}" onclick="S.ui.addType='${k}';S.ui.addForm=null;renderAdmin()">${v}s (${(data[k]||[]).length})</button>`).join('')}
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:.85rem"><button class="btn btn-g" onclick="S.ui.addForm={type:'${at}',author:'${esc(S.creds.owner.user)}',icon:'◈'};renderAdmin()">+ Add ${TF[at]}</button></div>
+    ${af?`<div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:1.25rem;margin-bottom:1rem">
+      ${[['Title *','title','',false],['Description','desc','',true],['Abilities','abilities','',false],['World','world','',false],['Tags','tags','tag1, tag2',false],['Icon','icon','◈',false],['Author','author',S.creds.owner.user,false]].map(([l,k,ph,multi])=>`<div class="lbl">${l}</div>${multi?`<textarea class="ta" onchange="S.ui.addForm['${k}']=this.value" style="margin-bottom:.5rem">${esc(af[k]||'')}</textarea>`:`<input class="inp" value="${esc(af[k]||ph)}" onchange="S.ui.addForm['${k}']=this.value" placeholder="${esc(ph||l)}" style="margin-bottom:.5rem${k==='icon'?';max-width:80px':''}">`}`).join('')}
+      <div class="lbl">Genre</div><select class="sel" onchange="S.ui.addForm['genre']=this.value" style="margin-bottom:.65rem"><option value="">Select genre</option>${(GE[af.type]||[]).map(g=>`<option value="${esc(g)}" ${af.genre===g?'selected':''}>${esc(g)}</option>`).join('')}</select>
+      <div style="display:flex;gap:.55rem;margin-top:.5rem"><button class="btn btn-g" onclick="addItem(S.ui.addForm);S.ui.addForm=null;toast('✓ Added!');renderAdmin()">Add</button><button class="btn btn-gh" onclick="S.ui.addForm=null;renderAdmin()">Cancel</button></div>
+    </div>`:''}
+    ${(data[at]||[]).map(item=>`<div class="irow"><span>${item.icon||'◈'}</span><div style="flex:1;min-width:0"><div class="irt">${esc(item.title)}</div><div class="irm">${esc(item.genre||'')}·By ${esc(item.author||'?')}·♥${item.likes||0}</div></div><span class="bdg ${item.visible?'bdg-gr':'bdg-r'}">${item.visible?'Vis':'Hidden'}</span>${item.mature?'<span class="bdg bdg-r">18+</span>':''}<button class="btn btn-sm ${item.visible?'btn-gh':'btn-gr'}" onclick="toggleVisible('${at}','${item.id}');renderAdmin()">${item.visible?'Hide':'Show'}</button><button class="btn btn-sm btn-gh" onclick="toggleMature('${at}','${item.id}');renderAdmin()">${item.mature?'−18+':'+18+'}</button><button class="btn btn-sm btn-r" onclick="if(confirm('Delete?')){deleteItem('${at}','${item.id}');toast('Deleted');renderAdmin()}">Del</button></div>`).join('')}
+    ${(data[at]||[]).length===0?'<div class="empty"><div class="empty-s">Nothing yet.</div></div>':''}`;
+  }else if(sec==='submissions'){
+    const pend=data.pending||[];
+    body=`<div style="font-family:monospace;font-size:.48rem;color:var(--text3);margin-bottom:.85rem">${pend.length} pending</div>
+    ${pend.length===0?'<div class="empty"><div class="empty-s">No pending submissions.</div></div>':''}
+    ${pend.map(sub=>`<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem 1.15rem;margin-bottom:.6rem"><div style="font-weight:700;font-size:.87rem;color:var(--text);margin-bottom:4px">${esc(sub.title)}</div><div style="font-family:monospace;font-size:.45rem;color:var(--text3);margin-bottom:.5rem">${esc(sub.type||'')}·${esc(sub.genre||'')}·By ${esc(sub.author||'?')}</div><div style="font-size:.78rem;color:var(--text2);line-height:1.65;margin-bottom:.6rem">${esc(sub.desc||'')}</div><div style="display:flex;gap:.5rem"><button class="btn btn-gr" onclick="accSub('${sub.id}')">✓ Accept</button><button class="btn btn-r" onclick="rejSub('${sub.id}')">✕ Reject</button></div></div>`).join('')}`;
+  }else if(sec==='users'){body=adminUsersFullHTML();
+  }else if(sec==='suggestions'){
+    const sugs=data.suggestions||[];
+    body=`<div style="font-family:monospace;font-size:.48rem;color:var(--text3);margin-bottom:.85rem">${sugs.length} suggestions</div>
+    ${sugs.length===0?'<div class="empty"><div class="empty-s">No suggestions yet.</div></div>':''}
+    ${sugs.slice().sort((a,b)=>(b.votes||0)-(a.votes||0)).map(sg=>`<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem 1.15rem;margin-bottom:.6rem"><div style="display:flex;justify-content:space-between;margin-bottom:.5rem"><div><div style="font-weight:700;font-size:.87rem;color:var(--text)">${esc(sg.title)}</div><div style="font-family:monospace;font-size:.44rem;color:var(--text3);margin-top:3px">${sg.votes||0} votes · By ${esc(sg.author||'?')}</div></div><span class="bdg ${sg.status==='approved'?'bdg-gr':sg.status==='rejected'?'bdg-r':'bdg-b'}">${sg.status||'pending'}</span></div><div style="font-size:.78rem;color:var(--text2);line-height:1.65;margin-bottom:.6rem">${esc(sg.desc||'')}</div><div style="display:flex;gap:.5rem"><button class="btn btn-sm btn-gr" onclick="setData(d=>({...d,suggestions:d.suggestions.map(s=>s.id==='${sg.id}'?{...s,status:'approved'}:s)}));toast('Approved');renderAdmin()">✓ Approve</button><button class="btn btn-sm btn-r" onclick="setData(d=>({...d,suggestions:d.suggestions.map(s=>s.id==='${sg.id}'?{...s,status:'rejected'}:s)}));toast('Rejected');renderAdmin()">✕ Reject</button><button class="btn btn-sm btn-gh" onclick="setData(d=>({...d,suggestions:d.suggestions.filter(s=>s.id!=='${sg.id}')}));toast('Deleted');renderAdmin()">Delete</button></div></div>`).join('')}`;
+  }else if(sec==='backdoor'){
+    const bdf=S.ui.bdf||'all';const mt=S.ui.massType||'characters';
+    const disp=bdf==='trash'?trash:allCt.filter(i=>bdf==='all'||(bdf==='visible'?i.visible:!i.visible));
+    body=`<div style="padding:.85rem 1rem;background:linear-gradient(135deg,var(--redbg),var(--purplebg));border:1px solid var(--red);border-radius:10px;margin-bottom:1.25rem"><div style="font-weight:700;font-size:.9rem;color:var(--red);margin-bottom:4px">🔑 Backdoor — Creator Override</div><div style="font-family:monospace;font-size:.49rem;color:var(--text3)">Full unrestricted control. Bypasses all permissions.</div></div>
+    <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.65rem">Content Vault</div>
+    <div style="display:flex;gap:.35rem;margin-bottom:.75rem;flex-wrap:wrap">${['all','visible','hidden','trash'].map(f=>`<button class="btn btn-sm ${bdf===f?'btn-g':'btn-gh'}" onclick="S.ui.bdf='${f}';renderAdmin()" style="text-transform:capitalize">${f} (${f==='trash'?trash.length:f==='all'?allCt.length:f==='visible'?allCt.filter(i=>i.visible).length:allCt.filter(i=>!i.visible).length})</button>`).join('')}</div>
+    <div style="max-height:195px;overflow-y:auto;margin-bottom:1.25rem">
+      ${disp.map(item=>`<div class="irow"><span>${item.icon||'◈'}</span><div style="flex:1;min-width:0"><div class="irt">${esc(item.title)}</div><div class="irm">${esc(item._type||item.type||'')}·By ${esc(item.author||'?')}</div></div>${bdf==='trash'?`<button class="btn btn-sm btn-gr" onclick="restoreT('${item.id}');toast('Restored');renderAdmin()">Restore</button><button class="btn btn-sm btn-r" onclick="setData(d=>({...d,trash:d.trash.filter(i=>i.id!=='${item.id}')}));toast('Perm deleted');renderAdmin()">Perm Del</button>`:`<div style="display:flex;align-items:center;gap:.3rem"><span style="font-family:monospace;font-size:.44rem;color:var(--text3)">♥</span><input type="number" value="${item.likes||0}" onchange="setData(d=>({...d,['${item._type}']:d['${item._type}'].map(i=>i.id==='${item.id}'?{...i,likes:Math.max(0,parseInt(this.value)||0)}:i)}))" style="width:52px;background:var(--bg2);border:1px solid var(--border2);border-radius:4px;padding:.18rem .3rem;color:var(--acc);font-family:monospace;font-size:.58rem;outline:none;text-align:center"></div><span class="bdg ${item.visible?'bdg-gr':'bdg-r'}">${item.visible?'Vis':'Hidden'}</span><button class="btn btn-sm btn-gh" onclick="toggleVisible('${item._type}','${item.id}');renderAdmin()">${item.visible?'Hide':'Show'}</button><button class="btn btn-sm btn-r" onclick="deleteItem('${item._type}','${item.id}');toast('Moved to trash');renderAdmin()">Del</button>`}</div>`).join('')}
+      ${disp.length===0?`<div class="empty"><div class="empty-s">${bdf==='trash'?'Trash empty.':'No content.'}</div></div>`:''}
+    </div>
+    <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.65rem">Mass Operations</div>
+    <div style="display:flex;gap:.35rem;margin-bottom:.65rem;flex-wrap:wrap">${Object.entries(TF).map(([k,v])=>`<button class="btn btn-sm ${mt===k?'btn-g':'btn-gh'}" onclick="S.ui.massType='${k}';renderAdmin()">${v}s</button>`).join('')}</div>
+    <div style="display:flex;gap:.42rem;flex-wrap:wrap;margin-bottom:1.25rem">
+      <button class="btn btn-gh btn-sm" onclick="setData(d=>({...d,['${mt}']:d['${mt}'].map(i=>({...i,visible:true}))}));toast('All shown');renderAdmin()">Show All</button>
+      <button class="btn btn-gh btn-sm" onclick="setData(d=>({...d,['${mt}']:d['${mt}'].map(i=>({...i,visible:false}))}));toast('All hidden');renderAdmin()">Hide All</button>
+      <button class="btn btn-gh btn-sm" onclick="setData(d=>({...d,['${mt}']:d['${mt}'].map(i=>({...i,likes:0}))}));toast('Likes reset');renderAdmin()">Reset Likes</button>
+      <button class="btn btn-r btn-sm" onclick="if(confirm('Move all to trash?')){const items=(S.data['${mt}']||[]).map(i=>({...i,_type:'${mt}',_del:new Date().toISOString()}));setData(d=>({...d,['${mt}']:[],trash:[...(d.trash||[]),...items]}));toast('Moved to trash');renderAdmin()}">Move to Trash</button>
+    </div>
+    <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.65rem">Nuclear Options</div>
+    <div style="display:flex;gap:.42rem;flex-wrap:wrap">
+      <button class="btn btn-r" onclick="setData(d=>({...d,siteDown:!d.siteDown}));renderAdmin();rerender()">${data.siteDown?'🔓 Site Up':'🔒 Site Down'}</button>
+      <button class="btn btn-r" onclick="setData(d=>({...d,loginsLocked:!d.loginsLocked}));renderAdmin()">${data.loginsLocked?'🔓 Unlock All':'🔒 Lock All'}</button>
+      <button class="btn btn-r" onclick="if(confirm('Move ALL content to trash? Cannot easily undo.')){const all=Object.keys(TF).flatMap(t=>(S.data[t]||[]).map(i=>({...i,_type:t,_del:new Date().toISOString()})));setData(d=>({...d,...Object.fromEntries(Object.keys(TF).map(t=>[t,[]])),trash:[...(d.trash||[]),...all]}));toast('All moved to trash');renderAdmin()}">🗑 Move ALL to Trash</button>
+      <button class="btn btn-b" onclick="expJSON()">⬇ Full Backup</button>
+    </div>`;
+  }else if(sec==='announce'){
+    body=`<div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.5rem">Broadcast Announcement</div>
+    <div style="font-size:.8rem;color:var(--text2);line-height:1.75;margin-bottom:.85rem">Appears as a banner on the home page for all visitors.</div>
+    <textarea class="ta" id="ann-txt" placeholder="Write your announcement..."></textarea>
+    <div style="margin-top:.7rem"><button class="btn btn-g" onclick="sendAnn()">📢 Send to All</button></div>
+    ${(data.announcements||[]).slice().reverse().slice(0,5).map(a=>`<div style="background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.72rem .9rem;margin-top:.42rem;display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem"><div style="font-size:.78rem;color:var(--text2);line-height:1.65;flex:1"><span style="color:var(--acc);font-family:monospace;font-size:.43rem">${new Date(a.sent).toLocaleDateString()} · </span>${esc(a.text)}</div><button class="btn btn-sm btn-r" onclick="setData(d=>({...d,announcements:d.announcements.filter(x=>x.id!=='${a.id}')}));renderAdmin()">✕</button></div>`).join('')}`;
+  }else if(sec==='settings'){
+    body=`<div style="max-width:400px">
+      <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.85rem">Change Admin Credentials</div>
+      <div class="lbl">New Username</div><input class="inp" id="au-new" placeholder="Enter new username" style="margin-bottom:.5rem">
+      <div class="lbl">Current Password</div><div class="pw-w" style="margin-bottom:.5rem"><input class="inp" id="ap-old" type="password" placeholder="Required"><button class="pw-tog" onclick="pwTog('ap-old',this)">👁</button></div>
+      <div class="lbl">New Password</div><div class="pw-w" style="margin-bottom:.5rem"><input class="inp" id="ap-new" type="password" placeholder="Leave blank to keep"><button class="pw-tog" onclick="pwTog('ap-new',this)">👁</button></div>
+      <div class="lbl">Confirm New Password</div><div class="pw-w" style="margin-bottom:.5rem"><input class="inp" id="ap-con" type="password" placeholder="Confirm"><button class="pw-tog" onclick="pwTog('ap-con',this)">👁</button></div>
+      <div id="acm" style="font-family:monospace;font-size:.51rem;margin:.55rem 0;display:none"></div>
+      <div style="margin-top:.75rem"><button class="btn btn-g" onclick="saveAdminCreds()">Save Changes</button></div>
+    </div>`;
+  }
+  root.innerHTML=`
+    <div class="ov fade" onclick="if(event.target===this)closeAdmin()">
+      <div class="ob" style="max-width:760px">
+        <div class="oh">
+          <div><div style="font-family:monospace;font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:3px">Admin · ${esc(S.creds.owner.user)}</div><div style="font-weight:700;font-size:1.1rem;color:var(--text)">⚙ Control Panel</div></div>
+          <div style="display:flex;gap:.5rem;align-items:center"><button class="btn btn-r" onclick="S.admin.auth=false;renderAdmin()">Lock</button><button class="oc" onclick="closeAdmin()">✕</button></div>
+        </div>
+        <div class="atabs">${secs.map(s=>`<button class="atab ${sec===s?'on':''}" onclick="S.admin.sec='${s}';renderAdmin()">${s}${s==='submissions'&&(data.pending||[]).length>0?' ('+(data.pending||[]).length+')':s==='suggestions'&&(data.suggestions||[]).filter(x=>x.status==='pending').length>0?' ('+(data.suggestions||[]).filter(x=>x.status==='pending').length+')':''}</button>`).join('')}</div>
+        <div style="padding:1.25rem 1.5rem">${body}</div>
+      </div>
+    </div>`;
+}
+function doLogin(){
+  const u=document.getElementById('au')?.value?.trim();const p=document.getElementById('ap')?.value;
+  if(chkAdmin(u,p)){S.admin.auth=true;document.getElementById('nyxmode').textContent='Admin Mode';renderAdmin();}
+  else{const e=document.getElementById('aerr');if(e){e.textContent='Wrong credentials.';e.style.display='block';}}
+}
+function accSub(id){
+  const sub=(S.data.pending||[]).find(s=>s.id===id);if(!sub)return;
+  const{type,...item}=sub;
+  setData(d=>({...d,[type]:[...(d[type]||[]),{...item,visible:true}],pending:d.pending.filter(s=>s.id!==id)}));
+  toast('✓ Accepted!');renderAdmin();
+}
+function rejSub(id){setData(d=>({...d,pending:d.pending.filter(s=>s.id!==id)}));toast('Rejected.');renderAdmin();}
+function restoreT(id){
+  const item=(S.data.trash||[]).find(i=>i.id===id);if(!item)return;
+  const{_type,_del,...rest}=item;
+  setData(d=>({...d,[_type]:[...(d[_type]||[]),{...rest,visible:false}],trash:d.trash.filter(i=>i.id!==id)}));
+}
+function sendAnn(){
+  const text=document.getElementById('ann-txt')?.value?.trim();if(!text)return;
+  setData(d=>({...d,announcements:[...(d.announcements||[]),{id:Date.now().toString(),text,sent:new Date().toISOString()}]}));
+  toast('📢 Announced!');renderAdmin();
+}
+function saveAdminCreds(){
+  const op=document.getElementById('ap-old')?.value;const nu=document.getElementById('au-new')?.value?.trim();
+  const np=document.getElementById('ap-new')?.value;const cp=document.getElementById('ap-con')?.value;
+  const msg=document.getElementById('acm');
+  if(!chkAdmin(document.getElementById('au-new')?.placeholder?.split(': ')[1]||'',op)&&!chkAdmin('The Creator',op)){msg.textContent='Wrong current password.';msg.style.color='var(--red)';msg.style.display='block';return;}
+  if(np&&np!==cp){msg.textContent="Passwords don't match.";msg.style.color='var(--red)';msg.style.display='block';return;}
+  if(nu)S.creds.admin.user=_h(nu);if(np)S.creds.admin.pass=_h(np);
+  sv(K.c,S.creds);msg.textContent='✓ Updated.';msg.style.color='var(--green)';msg.style.display='block';
+}
+// ── FILTER BAR ──
+function fbar(type){
+  const genres=['All',...new Set(allOf(type).map(i=>i.genre).filter(Boolean))];
+  return `<div class="fbar">${genres.map(g=>`<button class="fb ${S.ui.filter===g?'on':''}" onclick="S.ui.filter='${esc(g)}';rerender()">${esc(g)}</button>`).join('')}</div>`;
+}
+function cardH(item,type){
+  return `<div class="card" onclick="openCard(${JSON.stringify(item).replace(/"/g,'&quot;')},'${type}')">
+    <div class="cc">${item.cover?`<img src="${item.cover}" alt="" loading="lazy">`:(item.icon||'◈')}</div>
+    <div class="cb">
+      <div class="ct">${esc(type)}${item.genre?'·'+esc(item.genre):''}</div>
+      <div class="ctit">${esc(item.title)}</div>
+      <div class="cdesc">${esc(item.desc||'')}</div>
+      <div class="cf">
+        <span class="cauth">By ${esc(item.author||'?')}</span>
+        <button class="clikes" onclick="event.stopPropagation();likeItem('${type}','${item.id}');this.textContent='♥'+(S.data['${type}'].find(i=>i.id==='${item.id}')?.likes||0)">♥${item.likes||0}</button>
+      </div>
+      ${item.mature?'<div style="margin-top:.4rem"><span class="bdg bdg-r">18+</span></div>':''}
+    </div>
+  </div>`;
+}
+
+// ── TAB: HOME ──
+function activityChips(){
+  const now=new Date();const h=now.getHours();
+  const totalContent=Object.keys(TF).reduce((a,t)=>a+(S.data[t]||[]).length,0);
+  const chips=[
+    {dot:'amber',text:'Archive synchronized'},
+    {dot:'blue',text:`${totalContent} entries indexed`},
+    {dot:'',text:'Transmission active'},
+    {dot:'amber',text:`${S.vTotal} total signals received`},
+    {dot:'blue',text:'Lore systems online'},
+    {dot:'',text:`Last update: ${h<12?'this morning':h<17?'this afternoon':'tonight'}`},
+    {dot:'amber',text:'World synchronization complete'},
+  ];
+  return `<div class="activity-strip">${chips.map(c=>`<div class="act-chip">${c.dot?`<div class="act-dot ${c.dot}"></div>`:''}<span>${c.text}</span></div>`).join('')}</div>`;
+}
+function featuredSection(){
+  const chars=vis('characters');const poems=vis('poetry');const worlds=vis('worlds');const stories=vis('stories');
+  const allContent=[...chars.map(i=>({...i,_t:'characters'})),...poems.map(i=>({...i,_t:'poetry'})),...worlds.map(i=>({...i,_t:'worlds'})),...stories.map(i=>({...i,_t:'stories'}))];
+  if(allContent.length===0)return '';
+  const featured=chars[0]||allContent[0];
+  const featPoem=poems[0];
+  const featWorld=worlds[0];
+  const cards=[];
+  if(featured)cards.push(`
+    <div class="feat-card" onclick="openCard(${JSON.stringify(featured).replace(/"/g,'&quot;')},'${featured._t||'characters'}')">
+      <div class="feat-card-bg">${featured.cover?`<img src="${featured.cover}" alt="" loading="lazy">`:''}</div>
+      <div class="feat-card-overlay"></div>
+      <div class="feat-card-body">
+        <div class="feat-badge">Featured Character</div>
+        <div class="feat-eyebrow">${esc(featured.genre||'Character')}</div>
+        <div class="feat-title">${esc(featured.title)}</div>
+        ${featured.abilities?`<div class="feat-quote">"${esc(featured.abilities.slice(0,80))}${featured.abilities.length>80?'...':''}"</div>`:''}
+        <div class="feat-meta">By ${esc(featured.author||'Hunter')} · ♥${featured.likes||0}</div>
+      </div>
+    </div>`);
+  if(featPoem)cards.push(`
+    <div class="feat-card" onclick="openCard(${JSON.stringify(featPoem).replace(/"/g,'&quot;')},'poetry')">
+      <div class="feat-card-bg"></div>
+      <div class="feat-card-overlay" style="background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(167,139,250,.15) 100%)"></div>
+      <div class="feat-card-body">
+        <div class="feat-badge" style="background:var(--purplebg);color:var(--purple);border-color:var(--purple)">Transmission of the Day</div>
+        <div class="feat-eyebrow" style="color:var(--purple)">${esc(featPoem.genre||'Poetry')}</div>
+        <div class="feat-title">${esc(featPoem.title)}</div>
+        ${featPoem.desc?`<div class="feat-quote">"${esc(featPoem.desc.slice(0,90))}${featPoem.desc.length>90?'...':''}"</div>`:''}
+        <div class="feat-meta">By ${esc(featPoem.author||'Hunter')}</div>
+      </div>
+    </div>`);
+  if(featWorld)cards.push(`
+    <div class="feat-card" onclick="openCard(${JSON.stringify(featWorld).replace(/"/g,'&quot;')},'worlds')">
+      <div class="feat-card-bg">${featWorld.cover?`<img src="${featWorld.cover}" alt="" loading="lazy">`:''}</div>
+      <div class="feat-card-overlay" style="background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(90,158,248,.1) 100%)"></div>
+      <div class="feat-card-body">
+        <div class="feat-badge" style="background:var(--bluebg);color:var(--blue);border-color:var(--blue)">World Spotlight</div>
+        <div class="feat-eyebrow" style="color:var(--blue)">${esc(featWorld.genre||'World')}</div>
+        <div class="feat-title">${esc(featWorld.title)}</div>
+        ${featWorld.desc?`<div class="feat-quote">${esc(featWorld.desc.slice(0,90))}${featWorld.desc.length>90?'...':''}</div>`:''}
+        <div class="feat-meta">By ${esc(featWorld.author||'Hunter')}</div>
+      </div>
+    </div>`);
+  if(cards.length===0)return '';
+  return `
+    <div class="sec-hdr" style="margin-bottom:1rem"><div class="sec-t">Featured</div><span style="font-family:monospace;font-size:.47rem;color:var(--text3)">Rotating highlights</span></div>
+    <div class="feat-grid" style="grid-template-columns:repeat(${Math.min(cards.length,3)},1fr)">${cards.join('')}</div>`;
+}
+function tabHome(){
+  const data=S.data;
+  const recent=Object.entries(data).filter(([k])=>Object.keys(TF).includes(k)).flatMap(([type,items])=>items.filter(i=>i.visible).map(i=>({...i,type}))).slice(0,4);
+  const lastAnn=(data.announcements||[]).slice(-1)[0];
+  const st=S.streaks;
+  const totalContent=Object.keys(TF).reduce((a,t)=>a+(data[t]||[]).length,0);
+  return `
+    ${lastAnn?`<div class="annbanner"><span>📢</span><div><div style="font-family:monospace;font-size:.45rem;color:var(--acc);margin-bottom:4px;letter-spacing:.12em;text-transform:uppercase">Announcement</div><div style="font-size:.82rem;color:var(--text);line-height:1.7">${esc(lastAnn.text)}</div></div></div>`:''}
+    ${data.siteDown?`<div style="padding:.65rem .95rem;background:var(--redbg);border:1px solid var(--red);border-radius:8px;margin-bottom:1.75rem;font-family:monospace;font-size:.52rem;color:var(--red)">⚠ Site is in maintenance mode.</div>`:''}
+    <div class="hero">
+      <div class="hero-eye">Welcome to The Nexus</div>
+      <div class="hero-t">One universe.<br>Every story.</div>
+      <div class="hero-s">Characters, worlds, lore, poetry and stories — built by Hunter and open to the community. Explore, create, and get lost in it.</div>
+    </div>
+    <div class="sg">
+      ${[['Characters',vis('characters').length],['Poems',vis('poetry').length],['Worlds',vis('worlds').length],['Visits Today',S.vToday]].map(([l,n])=>`<div class="sc"><div class="sn">${n}</div><div class="sl">${esc(l)}</div></div>`).join('')}
+    </div>
+    ${S.settings.streaks?`<div class="strk">${[['🔥 Visit',st.vs||0,st.bv||0],['✎ Writing',st.ws||0,st.bw||0]].map(([l,v,b])=>`<div class="strc"><div style="font-size:1.5rem">${l.split(' ')[0]}</div><div><div style="font-weight:700;font-size:.9rem;color:var(--acc)">${l.split(' ')[1]} Streak: ${v} days</div><div style="font-family:monospace;font-size:.44rem;color:var(--text3);margin-top:4px">Best: ${b} days</div></div></div>`).join('')}</div>`:''}
+    ${totalContent>0?featuredSection():''}
+    <div class="ad"><span>ADVERTISEMENT · Google AdSense</span></div>
+    ${recent.length?`
+      <div class="sec-hdr"><div class="sec-t">Recent Content</div><span style="font-family:monospace;font-size:.48rem;color:var(--acc);cursor:pointer" onclick="go('library')">View Library →</span></div>
+      <div class="cgrid" style="margin-bottom:2rem">${recent.map(i=>cardH(i,i.type)).join('')}</div>`:`
+      <div class="empty-v2">
+        <div class="empty-v2-icon">◈</div>
+        <div class="empty-v2-title">The archives await your first entry.</div>
+        <div class="empty-v2-sub">No transmissions recorded yet. The universe is being built.</div>
+      </div>`}
+    <div class="ad"><span>ADVERTISEMENT · Google AdSense</span></div>`;
+}
+
+// ── TAB: LIBRARY ──
+function tabLibrary(){
+  if(S.ui.libReading){
+    const item=S.ui.libReading;
+    const r=S.ui.ratings[item.id];const ur=S.ui.userRatings[item.id];
+    return `<div style="max-width:780px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1.5rem">
+        <button class="btn btn-gh" onclick="S.ui.libReading=null;rerender()">← Back to Library</button>
+        <div style="font-weight:700;font-size:1.05rem;color:var(--text);flex:1">${esc(item.title)}</div>
+      </div>
+      ${item.cover?`<img src="${item.cover}" style="width:100%;border-radius:12px;margin-bottom:1.5rem;max-height:240px;object-fit:cover" loading="lazy">`:''}
+      <div style="display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center">
+        <span class="bdg bdg-g">${esc(item.type)}</span>
+        ${item.genre?`<span class="bdg bdg-gh">${esc(item.genre)}</span>`:''}
+        ${item.mature?'<span class="bdg bdg-r">18+</span>':''}
+        <span style="font-family:monospace;font-size:.46rem;color:var(--text3)">By ${esc(item.author||'?')}</span>
+        ${r?`<span style="font-family:monospace;font-size:.46rem;color:var(--acc)">★ ${r.avg} (${r.count} ratings)</span>`:''}
+      </div>
+      <div style="display:flex;gap:.45rem;align-items:center;margin-bottom:1.5rem;padding:.9rem 1.15rem;background:var(--bg3);border-radius:10px">
+        <span style="font-family:monospace;font-size:.5rem;color:var(--text3);margin-right:.4rem">Rate this:</span>
+        ${[1,2,3,4,5].map(n=>`<button class="starbtn" style="color:${(ur||0)>=n?'var(--acc)':'var(--border2)'}" onclick="rateItem('${item.id}',${n});rerender()">★</button>`).join('')}
+        ${ur?`<span style="font-family:monospace;font-size:.49rem;color:var(--acc);margin-left:.4rem">Your: ${ur}/5</span>`:''}
+        <div style="margin-left:auto"><button class="btn btn-gh btn-sm" onclick="recItem('${item.id}','${item.type}')">👍 Recommend ♥${item.likes||0}</button></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem;color:var(--text);font-size:.92rem;line-height:1.9">
+        ${item.content?item.content:`
+          ${item.desc?`<p style="margin-bottom:1.25rem;color:var(--text2);font-style:italic;line-height:1.85">${esc(item.desc)}</p>`:''}
+          ${item.abilities?`<div style="font-family:monospace;font-size:.49rem;color:var(--text3);margin-bottom:7px;text-transform:uppercase">Abilities</div><p style="margin-bottom:1.25rem;line-height:1.85">${esc(item.abilities)}</p>`:''}
+          ${item.world?`<div style="font-family:monospace;font-size:.49rem;color:var(--text3);margin-bottom:7px;text-transform:uppercase">World</div><p style="color:var(--text2);line-height:1.85">${esc(item.world)}</p>`:''}
+        `}
+      </div>
+    </div>`;
+  }
+  let items=Object.entries(S.data).filter(([k])=>Object.keys(TF).includes(k)||k==='writes').flatMap(([type,arr])=>arr.filter(i=>i.visible).map(i=>({...i,type})));
+  if(S.ui.libFilter!=='All')items=items.filter(i=>i.type===S.ui.libFilter);
+  const q=(S.ui.libSearch||'').toLowerCase().trim();
+  if(q)items=items.filter(i=>(i.title||'').toLowerCase().includes(q)||(i.desc||'').toLowerCase().includes(q)||(i.author||'').toLowerCase().includes(q));
+  const srt=S.ui.libSort;
+  if(srt==='newest')items.sort((a,b)=>new Date(b.created||0)-new Date(a.created||0));
+  else if(srt==='top')items.sort((a,b)=>(b.likes||0)-(a.likes||0));
+  else if(srt==='rated')items.sort((a,b)=>(S.ui.ratings[b.id]?.avg||0)-(S.ui.ratings[a.id]?.avg||0));
+  else items.sort((a,b)=>a.title.localeCompare(b.title));
+  return `
+    <div class="hero">
+      <div class="hero-eye">Community Library</div>
+      <div class="hero-t" style="font-size:1.4rem">Browse. Read. Rate.</div>
+      <div class="hero-s">All published work in one place. Filter, search, rate, and recommend what you love.</div>
+    </div>
+    <div style="display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap">
+      <input class="inp" value="${esc(S.ui.libSearch||'')}" id="libsearch" oninput="doLibSearch(this.value)" placeholder="🔍 Search by title, author, or tag..." style="flex:1 1 200px">
+      <select class="sel" style="flex:0 0 auto;width:auto" onchange="S.ui.libSort=this.value;rerender()">
+        <option value="newest" ${S.ui.libSort==='newest'?'selected':''}>Newest First</option>
+        <option value="top" ${S.ui.libSort==='top'?'selected':''}>Most Liked</option>
+        <option value="rated" ${S.ui.libSort==='rated'?'selected':''}>Highest Rated</option>
+        <option value="az" ${S.ui.libSort==='az'?'selected':''}>A → Z</option>
+      </select>
+    </div>
+    <div class="fbar">
+      <button class="fb ${S.ui.libFilter==='All'?'on':''}" onclick="S.ui.libFilter='All';rerender()">All Types</button>
+      ${Object.entries(TF).map(([k,v])=>`<button class="fb ${S.ui.libFilter===k?'on':''}" onclick="S.ui.libFilter='${k}';rerender()">${v}</button>`).join('')}
+    </div>
+    ${items.length===0?`<div class="empty-v2"><div class="empty-v2-icon">📚</div><div class="empty-v2-title">The library has no transmissions yet.</div><div class="empty-v2-sub">All published work will be indexed here. Add content through Admin to begin.</div></div>`:''}
+    ${items.map(item=>{
+      const r=S.ui.ratings[item.id];const ur=S.ui.userRatings[item.id];
+      return `<div class="libi" onclick="openCard(${JSON.stringify(item).replace(/"/g,'&quot;')},null,true)">
+        <div class="librow">
+          <div class="libthumb">${item.cover?`<img src="${item.cover}" alt="" loading="lazy">`:(item.icon||'◈')}</div>
+          <div class="libin">
+            <div style="display:flex;gap:.45rem;align-items:center;margin-bottom:.38rem;flex-wrap:wrap">
+              <div class="libt">${esc(item.title)}</div>
+              <span class="bdg bdg-g">${esc(item.type)}</span>
+              ${item.genre?`<span class="bdg bdg-gh">${esc(item.genre)}</span>`:''}
+              ${item.mature?'<span class="bdg bdg-r">18+</span>':''}
+            </div>
+            <div class="libd">${esc(item.desc||'')}</div>
+            <div class="libm">
+              <span class="libmi">By ${esc(item.author||'?')}</span>
+              <span class="libmi">♥${item.likes||0}</span>
+              ${r?`<span class="libmi" style="color:var(--acc)">★ ${r.avg} avg</span>`:''}
+              <div style="display:flex;gap:.18rem" onclick="event.stopPropagation()">
+                ${[1,2,3,4,5].map(n=>`<button class="starbtn" style="color:${(ur||0)>=n?'var(--acc)':'var(--border2)'}" onclick="rateItem('${item.id}',${n});rerender()">★</button>`).join('')}
+              </div>
+              <button onclick="event.stopPropagation();recItem('${item.id}','${item.type}')" style="background:var(--accbg);border:1px solid var(--acc2);border-radius:5px;padding:.16rem .42rem;cursor:pointer;font-family:monospace;font-size:.47rem;color:var(--acc)">👍 Recommend</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}`;
+}
+function rateItem(id,val){
+  const prev=S.ui.ratings[id]||{count:0,total:0};const already=S.ui.userRatings[id];
+  if(already){const nt=prev.total-already+val;S.ui.ratings[id]={count:prev.count,total:nt,avg:Math.round((nt/prev.count)*10)/10};}
+  else S.ui.ratings[id]={count:prev.count+1,total:prev.total+val,avg:Math.round(((prev.total+val)/(prev.count+1))*10)/10};
+  S.ui.userRatings[id]=val;
+}
+function recItem(id,type){
+  if(!type||!S.data[type])return;
+  setData(d=>({...d,[type]:d[type].map(i=>i.id===id?{...i,likes:(i.likes||0)+1}:i)}));
+  rerender();
+}
+
+function charProfileHTML(c){
+  const dangerLevel=c.dangerLevel||5;
+  const abilities=(c.abilities||'').split(',').map(a=>a.trim()).filter(Boolean);
+  const relationships=(c.relationships||'').split(',').map(r=>r.trim()).filter(Boolean);
+  const timeline=(c.timeline||'').split('|').map(t=>t.trim()).filter(Boolean);
+  return `<div class="char-profile">
+    <button class="btn btn-gh" style="margin-bottom:1.25rem" onclick="S.ui.charProfile=null;rerender()">← Back to Characters</button>
+    <div class="char-prof-hero">
+      <div class="char-prof-bg">${c.cover?`<img src="${c.cover}" alt="" loading="lazy">`:''}</div>
+      <div class="char-prof-overlay"></div>
+      <div class="char-prof-body">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem">
+          <span class="bdg bdg-g">${esc(c.genre||'Character')}</span>
+          ${c.status?`<span class="bdg" style="background:${c.status.toLowerCase().includes('active')?'var(--greenbg)':'var(--redbg)'};color:${c.status.toLowerCase().includes('active')?'var(--green)':'var(--red)'}">${esc(c.status)}</span>`:''}
+          ${c.mature?'<span class="bdg bdg-r">18+</span>':''}
+        </div>
+        <div class="char-prof-name">${esc(c.title)}</div>
+        ${c.aliases?`<div class="char-prof-alias">Also known as: ${esc(c.aliases)}</div>`:''}
+        ${c.affiliation?`<div style="font-family:monospace;font-size:.48rem;color:rgba(255,255,255,.5);margin-bottom:.35rem">Affiliation: ${esc(c.affiliation)}</div>`:''}
+        ${c.quote?`<div class="char-prof-quote">"${esc(c.quote)}"</div>`:''}
+      </div>
+    </div>
+    <div class="char-stats-grid">
+      ${c.world?`<div class="char-stat"><div class="char-stat-label">World</div><div class="char-stat-val">${esc(c.world)}</div></div>`:''}
+      ${c.status?`<div class="char-stat"><div class="char-stat-label">Status</div><div class="char-stat-val">${esc(c.status)}</div></div>`:''}
+      ${c.affiliation?`<div class="char-stat"><div class="char-stat-label">Affiliation</div><div class="char-stat-val">${esc(c.affiliation)}</div></div>`:''}
+      <div class="char-stat">
+        <div class="char-stat-label">Danger Level</div>
+        <div class="char-stat-val">${dangerLevel}/10</div>
+        <div class="danger-bar"><div class="danger-fill" style="width:${dangerLevel*10}%"></div></div>
+      </div>
+      <div class="char-stat"><div class="char-stat-label">Likes</div><div class="char-stat-val">♥ ${c.likes||0}</div></div>
+      <div class="char-stat"><div class="char-stat-label">Author</div><div class="char-stat-val">${esc(c.author||'Hunter')}</div></div>
+    </div>
+    ${c.desc?`<div class="char-section"><div class="char-section-title">Overview</div><p style="font-size:.87rem;color:var(--text2);line-height:1.9">${esc(c.desc)}</p></div>`:''}
+    ${abilities.length?`<div class="char-section"><div class="char-section-title">Abilities & Powers</div><div>${abilities.map(a=>`<div class="ability-chip"><span class="abi-ico">⚡</span>${esc(a)}</div>`).join('')}</div></div>`:''}
+    ${c.abilities&&!abilities.length?`<div class="char-section"><div class="char-section-title">Abilities & Powers</div><p style="font-size:.85rem;color:var(--text2);line-height:1.85">${esc(c.abilities)}</p></div>`:''}
+    ${relationships.length?`<div class="char-section"><div class="char-section-title">Relationships</div>${relationships.map(r=>`<div class="rel-item"><div class="rel-av">${r[0].toUpperCase()}</div><div style="font-size:.83rem;color:var(--text)">${esc(r)}</div></div>`).join('')}</div>`:''}
+    ${timeline.length?`<div class="char-section"><div class="char-section-title">Lore Timeline</div>${timeline.map((t,i)=>`<div class="timeline-item"><div class="timeline-dot-wrap"><div class="timeline-dot"></div>${i<timeline.length-1?'<div class="timeline-line"></div>':''}</div><div class="timeline-content"><div class="timeline-era">Entry ${String(i+1).padStart(2,'0')}</div><div class="timeline-text">${esc(t)}</div></div></div>`).join('')}</div>`:''}
+    ${(c.tags||[]).length?`<div class="char-section"><div class="char-section-title">Tags</div><div>${c.tags.map(t=>`<span style="font-family:monospace;font-size:.45rem;padding:.16rem .42rem;border-radius:5px;border:1px solid var(--border2);color:var(--text2);display:inline-block;margin:0 .2rem .25rem 0">${esc(t)}</span>`).join('')}</div></div>`:''}
+    <div style="padding-top:1rem;border-top:1px solid var(--border);display:flex;gap:.7rem">
+      <button class="btn btn-gh" onclick="likeItem('characters','${c.id}');rerender()">♥${c.likes||0} Likes</button>
+    </div>
+  </div>`;
+}
+function tabCharacters(){
+  if(S.ui.charProfile){const c=(S.data.characters||[]).find(x=>x.id===S.ui.charProfile);if(c)return charProfileHTML(c);}
+  const items=filt('characters');const groups=alphaG(items);
+  return `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem">
+      <div>
+        <div style="font-family:monospace;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--acc);margin-bottom:4px">Character Archive</div>
+        <div style="font-weight:700;font-size:1.05rem;color:var(--text)">All Known Entities</div>
+      </div>
+      <div style="font-family:monospace;font-size:.48rem;color:var(--text3)">${items.length} entries indexed</div>
+    </div>
+    <div class="search-wrap"><span class="search-ico">🔍</span><input type="text" value="${esc(S.ui.search||'')}" id="charsearch" oninput="doSearch(this.value,'charsearch')" placeholder="Search characters by name, world, or ability..."></div>
+    ${fbar('characters')}
+    ${groups.length===0?`<div class="empty-v2"><div class="empty-v2-icon">◈</div><div class="empty-v2-title">No entities catalogued yet.</div><div class="empty-v2-sub">The character archive remains empty. All known entities will appear here once added.</div></div>`:''}
+    ${groups.map(([letter,chars])=>`
+      <div style="margin-bottom:1.75rem">
+        <div style="font-weight:700;font-size:1.35rem;color:var(--border2);border-bottom:1px solid var(--border);padding-bottom:.35rem;margin-bottom:.75rem">${esc(letter)}</div>
+        <div class="chg cgrid">
+          ${chars.map(c=>`
+            <div class="chi" onclick="S.ui.charProfile='${c.id}';rerender()">
+              <div class="chico">${esc(c.icon||'◈')}</div>
+              <div>
+                <div style="font-weight:700;font-size:.82rem;color:var(--text)">${esc(c.title)}</div>
+                <div style="font-family:monospace;font-size:.44rem;color:var(--text3);margin-top:3px">${esc(c.genre||'')}${c.world?' · '+esc(c.world):''}${c.status?' · '+esc(c.status):''}${c.mature?' · 18+':''}</div>
+                ${c.dangerLevel?`<div style="margin-top:5px"><div class="danger-bar" style="height:3px"><div class="danger-fill" style="width:${c.dangerLevel*10}%"></div></div></div>`:''}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>`).join('')}`;
+}
+
+// ── TAB: GENERIC GRID ──
+const emptyMessages={
+  worlds:{icon:'◎',title:'No worlds discovered yet.',sub:'The dimensional atlas is empty. All known worlds will appear here once charted.'},
+  lore:{icon:'✦',title:'The lore archives are silent.',sub:'No entries recorded. Abilities, artifacts, and systems will be indexed here.'},
+  stories:{icon:'▷',title:'No stories transmitted yet.',sub:'The story archive awaits its first entry. All submitted works will appear here.'},
+  designs:{icon:'🎨',title:'No designs archived yet.',sub:'Character designs and original art will be stored here once uploaded.'}
+};
+function tabGrid(type){
+  const items=filt(type);const em=emptyMessages[type]||{icon:'◈',title:'Nothing here yet.',sub:'Content will appear here once added.'};
+  return `
+    <div class="search-wrap"><span class="search-ico">🔍</span><input type="text" value="${esc(S.ui.search||'')}" id="gridsearch" oninput="doSearch(this.value,'gridsearch')" placeholder="Search ${type}..."></div>
+    ${fbar(type)}
+    ${items.length===0?`<div class="empty-v2"><div class="empty-v2-icon">${em.icon}</div><div class="empty-v2-title">${em.title}</div><div class="empty-v2-sub">${em.sub}</div></div>`:''}
+    <div class="cgrid">${items.map(i=>cardH(i,type)).join('')}</div>`;
+}
+
+// ── TAB: POETRY ──
+function tabPoetry(){
+  const items=filt('poetry');
+  return `
+    <div class="poetry-hero">
+      <div class="poetry-archive-label">The Archive</div>
+      <div class="poetry-hero-title">Words That Carry Weight</div>
+      <div class="poetry-hero-sub">54 nations. One collection. Poetry built to outlast the poet — structured, intentional, and rooted in something real.</div>
+    </div>
+    <div class="search-wrap"><span class="search-ico">🔍</span><input type="text" value="${esc(S.ui.search||'')}" id="poemsearch" oninput="doSearch(this.value,'poemsearch')" placeholder="Search poems by title, nation, or theme..."></div>
+    ${fbar('poetry')}
+    ${items.length===0?`<div class="empty-v2"><div class="empty-v2-icon">◇</div><div class="empty-v2-title">The archive awaits its first transmission.</div><div class="empty-v2-sub">No poems recorded yet. When words arrive, they will be held here — permanently.</div></div>`:''}
+    ${items.map((p,i)=>`
+      <div class="poem-card" onclick="openCard(${JSON.stringify(p).replace(/"/g,'&quot;')},'poetry')">
+        <div class="poem-num">Transmission ${String(i+1).padStart(2,'0')}</div>
+        <div class="poem-title">${esc(p.title)}</div>
+        ${p.desc?`<div class="poem-excerpt">"${esc(p.desc.slice(0,120))}${p.desc.length>120?'...':''}"</div>`:''}
+        <div class="poem-footer">
+          <span class="poem-nation">${esc(p.genre||'Poetry')}</span>
+          <div style="display:flex;align-items:center;gap:.65rem">
+            <span style="font-family:monospace;font-size:.44rem;color:var(--text3)">By ${esc(p.author||'Hunter')}</span>
+            <button class="clikes" onclick="event.stopPropagation();likeItem('poetry','${p.id}');this.textContent='♥'+(S.data.poetry.find(i=>i.id==='${p.id}')?.likes||0)">♥${p.likes||0}</button>
+          </div>
+        </div>
+      </div>`).join('')}
+    ${items.length>0?`<div style="text-align:center;padding:1.5rem 0;font-family:monospace;font-size:.46rem;color:var(--text3)">${items.length} of 54 nations recorded</div>`:''}
+    <div class="ad"><span>ADVERTISEMENT · Google AdSense</span></div>`;
+}
+
+// ── TAB: DESIGNS ──
+let dImgData=null;
+function tabDesigns(){
+  const designs=S.data.designs||[];
+  return `
+    <div class="sec-hdr"><div class="sec-t">Designs & Art</div><button class="btn btn-g" onclick="showDesignUpload()">+ Upload Design</button></div>
+    <div id="dupload"></div>
+    <div class="dgrid cgrid">
+      ${designs.map(d=>`
+        <div class="dcard" onclick="openCard(${JSON.stringify(d).replace(/"/g,'&quot;')},'designs')">
+          <div class="dthumb">${d.img?`<img src="${d.img}" alt="" loading="lazy">`:'🎨'}</div>
+          <div style="padding:1rem">
+            <div style="font-weight:700;font-size:.87rem;color:var(--text);margin-bottom:4px">${esc(d.title)}</div>
+            ${d.character?`<div style="font-family:monospace;font-size:.44rem;color:var(--acc);margin-bottom:4px">Character: ${esc(d.character)}</div>`:''}
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-family:monospace;font-size:.44rem;color:var(--text3)">By ${esc(d.author||'?')}</span>
+              <button class="clikes" onclick="event.stopPropagation();likeItem('designs','${d.id}');this.textContent='♥'+(S.data.designs.find(i=>i.id==='${d.id}')?.likes||0)">♥${d.likes||0}</button>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>
+    ${designs.length===0?'<div class="empty"><div class="empty-s">No designs yet.</div></div>':''}`;
+}
+function showDesignUpload(){
+  const el=document.getElementById('dupload');if(!el)return;
+  el.innerHTML=`<div style="background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem">
+    <div style="width:100%;height:90px;border-radius:10px;border:2px dashed var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;background:var(--bg2);margin-bottom:.85rem;position:relative" id="dprev" onclick="document.getElementById('dfile').click()">
+      <span style="font-family:monospace;font-size:.52rem;color:var(--text3)" id="dprevlbl">🎨 CLICK TO UPLOAD ART OR DESIGN</span>
+      <input type="file" id="dfile" accept="image/*" style="display:none" onchange="prevDesign(this)">
+    </div>
+    <input class="inp" id="dtitle" placeholder="Design title *" style="margin-bottom:.5rem">
+    <input class="inp" id="dchar" placeholder="Which character?" style="margin-bottom:.5rem">
+    <input class="inp" id="ddesc" placeholder="Brief description" style="margin-bottom:.85rem">
+    <div style="display:flex;gap:.55rem"><button class="btn btn-g" onclick="saveDesign()">Save Design</button><button class="btn btn-gh" onclick="document.getElementById('dupload').innerHTML='';dImgData=null">Cancel</button></div>
+  </div>`;
+}
+function prevDesign(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{dImgData=ev.target.result;const lbl=document.getElementById('dprevlbl');if(lbl)lbl.innerHTML=`<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:8px">`;};r.readAsDataURL(f);
+}
+function saveDesign(){
+  const title=document.getElementById('dtitle')?.value?.trim();
+  if(!title||!dImgData){toast('Title and image required');return;}
+  setData(d=>({...d,designs:[...(d.designs||[]),{id:Date.now().toString(),title,character:document.getElementById('dchar')?.value||'',desc:document.getElementById('ddesc')?.value||'',img:dImgData,author:S.creds.owner.user,likes:0,created:new Date().toISOString()}]}));
+  dImgData=null;document.getElementById('dupload').innerHTML='';toast('✓ Design saved!');rerender();
+}
+
+// ── TAB: WRITE ──
+let wCoverData=null;
+function tabWrite(){
+  return `<div style="max-width:820px;margin:0 auto">
+    <div id="wcoverwrap" style="width:100%;height:68px;border-radius:12px;border:2px dashed var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;background:var(--bg3);position:relative;margin-bottom:.9rem" onclick="document.getElementById('wcover').click()">
+      <span style="font-family:monospace;font-size:.52rem;color:var(--text3)" id="wcoverlbl">🖼 CLICK TO UPLOAD COVER IMAGE</span>
+      <input type="file" id="wcover" accept="image/*" style="display:none" onchange="setWCover(this)">
+    </div>
+    <input class="inp" id="wtitle" placeholder="Title your work..." style="font-size:1.1rem;font-weight:700;margin-bottom:.78rem">
+    <div style="display:flex;gap:.5rem;margin-bottom:.68rem;flex-wrap:wrap">
+      <select class="sel" id="wtype" style="flex:1 1 100px" onchange="updateGenreSelect(this.value)">
+        ${Object.entries(TF).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}
+      </select>
+      <select class="sel" id="wgenre" style="flex:1 1 100px">
+        <option value="">Genre...</option>${(GE['stories']||[]).map(g=>`<option>${g}</option>`).join('')}
+      </select>
+      <input class="inp" id="wtags" placeholder="Tags: fantasy, dark..." style="flex:2 1 180px">
+    </div>
+    <div style="display:flex;gap:.5rem;margin-bottom:.62rem;flex-wrap:wrap;align-items:center">
+      <select class="sel" id="wfont" style="flex:1 1 120px" onchange="document.getElementById('wed').style.fontFamily=this.value">
+        <option value="Georgia,serif">Georgia</option>
+        <option value="Arial,sans-serif">Arial</option>
+        <option value="'Times New Roman',serif">Times New Roman</option>
+        <option value="'Courier New',monospace">Courier</option>
+      </select>
+      <span style="font-family:monospace;font-size:.5rem;color:var(--text3)">Spacing:</span>
+      <select class="sel" style="width:auto;flex:0 0 auto" onchange="document.getElementById('wed').style.lineHeight=this.value">
+        <option>1.5</option><option selected>1.9</option><option>2.0</option><option>2.5</option>
+      </select>
+    </div>
+    <div class="etb">
+      <button class="tbtn" onmousedown="e2('bold',event)"><b>B</b></button>
+      <button class="tbtn" onmousedown="e2('italic',event)"><i>I</i></button>
+      <button class="tbtn" onmousedown="e2('underline',event)"><u>U</u></button>
+      <button class="tbtn" onmousedown="e2('strikeThrough',event)"><s>S</s></button>
+      <button class="tbtn" onmousedown="e2('superscript',event)">x²</button>
+      <button class="tbtn" onmousedown="e2('subscript',event)">x₂</button>
+      <div class="tdiv"></div>
+      <button class="tbtn" onmousedown="e3('formatBlock','h1',event)">H1</button>
+      <button class="tbtn" onmousedown="e3('formatBlock','h2',event)">H2</button>
+      <button class="tbtn" onmousedown="e3('formatBlock','h3',event)">H3</button>
+      <button class="tbtn" onmousedown="e3('formatBlock','p',event)">¶</button>
+      <div class="tdiv"></div>
+      <button class="tbtn" onmousedown="e2('justifyLeft',event)">⬤≡</button>
+      <button class="tbtn" onmousedown="e2('justifyCenter',event)">≡≡</button>
+      <button class="tbtn" onmousedown="e2('justifyRight',event)">≡⬤</button>
+      <div class="tdiv"></div>
+      <button class="tbtn" onmousedown="e2('insertUnorderedList',event)">• List</button>
+      <button class="tbtn" onmousedown="e2('insertOrderedList',event)">1. List</button>
+      <button class="tbtn" onmousedown="e2('indent',event)">→|</button>
+      <button class="tbtn" onmousedown="e2('outdent',event)">|←</button>
+      <div class="tdiv"></div>
+      <select onchange="e3('fontSize',this.value)" style="background:var(--bg2);border:1px solid var(--border2);color:var(--text2);border-radius:5px;padding:.14rem .3rem;font-size:.59rem;cursor:pointer;outline:none">
+        ${[1,2,3,4,5,6,7].map(n=>`<option value="${n}" ${n===3?'selected':''}>${[10,12,14,18,24,36,48][n-1]}px</option>`).join('')}
+      </select>
+      <input type="color" value="#e4e4f0" title="Text Color" onchange="e3('foreColor',this.value)" style="width:22px;height:22px;border:none;background:none;cursor:pointer;padding:0">
+      <input type="color" value="#1a1b24" title="Highlight" onchange="e3('hiliteColor',this.value)" style="width:22px;height:22px;border:none;background:none;cursor:pointer;padding:0">
+      <div class="tdiv"></div>
+      <button class="tbtn" onmousedown="insTable(event)">⊞ Table</button>
+      <button class="tbtn" onclick="document.getElementById('wimgf').click()">🖼 Image</button>
+      <input type="file" id="wimgf" accept="image/*" style="display:none" onchange="insImg(this)">
+      <button class="tbtn" onclick="insDec('quote')">Quote</button>
+      <button class="tbtn" onclick="insDec('divider')">──</button>
+      <button class="tbtn" onclick="insDec('callout')">Callout</button>
+      <button class="tbtn" onmousedown="e2('removeFormat',event)">✕ Fmt</button>
+    </div>
+    <div class="ea" id="wed" contenteditable="true" spellcheck="true" oninput="updWC()"></div>
+    <div class="efoot">
+      <span class="estats" id="wwc">0 words · 0 chars</span>
+      <div style="display:flex;gap:.38rem;flex-wrap:wrap;align-items:center">
+        <span id="wsaved" style="font-family:monospace;font-size:.48rem;color:var(--green);display:none">✓ Saved!</span>
+        <button class="btn btn-gh btn-sm" onclick="expTXT(document.getElementById('wtitle').value||'Untitled',document.getElementById('wed').innerHTML)">⬇ TXT</button>
+        <button class="btn btn-gh btn-sm" onclick="expPDF(document.getElementById('wtitle').value||'Untitled',document.getElementById('wed').innerHTML)">⬇ PDF</button>
+        <button class="btn btn-gh" onclick="clearWrite()">Clear</button>
+        <button class="btn btn-g" onclick="saveDraft()">💾 Save Draft</button>
+      </div>
+    </div>
+    <div style="margin-top:1.5rem"><div class="ad"><span>ADVERTISEMENT · Google AdSense</span></div></div>
+  </div>`;
+}
+function e2(cmd,ev){ev.preventDefault();document.execCommand(cmd,false,null);document.getElementById('wed')?.focus();}
+function e3(cmd,val,ev){if(ev&&ev.preventDefault)ev.preventDefault();document.execCommand(cmd,false,val);document.getElementById('wed')?.focus();}
+function setWCover(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{wCoverData=ev.target.result;const wrap=document.getElementById('wcoverwrap');if(wrap){wrap.style.height='170px';wrap.innerHTML=`<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:10px"><div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center"><span style="color:#fff;font-family:monospace;font-size:.52rem">CHANGE COVER</span></div><input type="file" id="wcover" accept="image/*" style="display:none" onchange="setWCover(this)">`;wrap.onclick=()=>document.getElementById('wcover')?.click();}};r.readAsDataURL(f);
+}
+function insTable(ev){
+  ev.preventDefault();
+  const b2=getComputedStyle(document.documentElement).getPropertyValue('--border2').trim();
+  let t='<table style="border-collapse:collapse;width:100%;margin:14px 0">';
+  for(let i=0;i<3;i++){t+='<tr>';for(let j=0;j<3;j++)t+=`<td style="border:1px solid ${b2};padding:10px 14px;min-width:80px" contenteditable="true">${i===0?'H'+(j+1):''}</td>`;t+='</tr>';}t+='</table>';
+  document.execCommand('insertHTML',false,t);document.getElementById('wed')?.focus();
+}
+function insImg(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{document.execCommand('insertHTML',false,`<img src="${ev.target.result}" style="max-width:100%;border-radius:10px;margin:10px 0;display:block">`);}; r.readAsDataURL(f);
+}
+function insDec(type){
+  const acc=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim();
+  const accbg=getComputedStyle(document.documentElement).getPropertyValue('--accbg').trim();
+  const t2=getComputedStyle(document.documentElement).getPropertyValue('--text2').trim();
+  const map={
+    quote:`<blockquote style="border-left:3px solid ${acc};padding:12px 16px;margin:14px 0;background:${accbg};border-radius:0 10px 10px 0;font-style:italic;color:${t2}">Quote here...</blockquote>`,
+    divider:`<div style="text-align:center;color:${acc};font-size:1rem;margin:16px 0;letter-spacing:.6em">✦ ◈ ✦</div>`,
+    callout:`<div style="background:rgba(90,158,248,.08);border:1px solid rgba(90,158,248,.2);border-radius:10px;padding:14px 16px;margin:12px 0">📌 Callout text here...</div>`
+  };
+  document.execCommand('insertHTML',false,map[type]||'');document.getElementById('wed')?.focus();
+}
+function updWC(){
+  const ed=document.getElementById('wed');const el=document.getElementById('wwc');if(!ed||!el)return;
+  const t=ed.innerText||'';el.textContent=(t.trim()?t.trim().split(/\s+/).length:0)+' words · '+t.length+' chars';
+}
+function clearWrite(){
+  const ed=document.getElementById('wed');const ti=document.getElementById('wtitle');
+  if(ed)ed.innerHTML='';if(ti)ti.value='';wCoverData=null;updWC();
+}
+function saveDraft(){
+  const title=document.getElementById('wtitle')?.value?.trim();
+  const content=document.getElementById('wed')?.innerHTML||'';
+  if(!title){toast('Add a title first');return;}
+  const ed=document.getElementById('wed');
+  const wc=ed?(ed.innerText.trim().split(/\s+/).length||0):0;
+  const draft={id:Date.now().toString(),title,content,type:document.getElementById('wtype')?.value||'stories',genre:document.getElementById('wgenre')?.value||'',tags:(document.getElementById('wtags')?.value||'').split(',').map(t=>t.trim()).filter(Boolean),author:S.creds.owner.user,wc,cover:wCoverData,desc:(ed?.innerText||'').slice(0,130),visible:true,created:new Date().toISOString(),icon:'✎'};
+  setData(d=>({...d,writes:[...(d.writes||[]),draft]}));
+  const msg=document.getElementById('wsaved');if(msg){msg.style.display='inline';setTimeout(()=>msg.style.display='none',2000);}
+  toast('✓ Saved to drafts!');
+}
+
+// ── TAB: DRAFTS ──
+function tabDrafts(){
+  const drafts=S.data.writes||[];
+  if(S.ui.viewDraft){
+    const d=S.ui.viewDraft;
+    return `<div style="max-width:800px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1.5rem">
+        <button class="btn btn-gh" onclick="S.ui.viewDraft=null;rerender()">← Back</button>
+        <div style="font-weight:700;font-size:1.05rem;color:var(--text);flex:1">${esc(d.title)}</div>
+        <button class="btn btn-gh btn-sm" onclick="expTXT('${esc(d.title)}',document.getElementById('drcontent').innerHTML)">TXT</button>
+        <button class="btn btn-gh btn-sm" onclick="expPDF('${esc(d.title)}',document.getElementById('drcontent').innerHTML)">PDF</button>
+        <button class="btn btn-r btn-sm" onclick="if(confirm('Delete?')){setData(d=>({...d,writes:d.writes.filter(w=>w.id!=='${d.id}')}));S.ui.viewDraft=null;rerender();toast('Deleted')}">Delete</button>
+      </div>
+      ${d.cover?`<img src="${d.cover}" style="width:100%;border-radius:12px;margin-bottom:1.5rem;max-height:230px;object-fit:cover" loading="lazy">`:''}
+      <div style="font-family:monospace;font-size:.47rem;color:var(--text3);margin-bottom:1.25rem;display:flex;gap:1.25rem;flex-wrap:wrap">
+        <span>${esc(d.genre||'No genre')}</span><span>${d.wc||0} words</span><span>${new Date(d.created).toLocaleDateString()}</span>
+      </div>
+      <div id="drcontent" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem;color:var(--text);font-size:.92rem;line-height:1.9">${d.content||`<em style="color:var(--text3)">Empty draft</em>`}</div>
+    </div>`;
+  }
+  return `
+    <div class="sec-hdr"><div class="sec-t">Saved Drafts (${drafts.length})</div><button class="btn btn-g" onclick="go('write')">+ New Draft</button></div>
+    ${drafts.length===0?'<div class="empty"><div class="empty-s">No drafts yet. Head to Write to start something.</div></div>':''}
+    ${drafts.map(d=>`
+      <div class="dritem" onclick="S.ui.viewDraft=${JSON.stringify(d).replace(/"/g,'&quot;')};rerender()">
+        ${d.cover?`<img class="drcov" src="${d.cover}" alt="" loading="lazy">`:''}
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:4px">${esc(d.title)}</div>
+          <div style="font-size:.79rem;color:var(--text2);line-height:1.65;margin-bottom:.35rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${esc(d.desc||'No preview')}</div>
+          <div style="font-family:monospace;font-size:.45rem;color:var(--text3)">${d.wc||0} words · ${esc(d.genre||'No genre')} · ${new Date(d.created).toLocaleDateString()}</div>
+        </div>
+        <button class="btn btn-r btn-sm" onclick="event.stopPropagation();if(confirm('Delete?')){setData(d=>({...d,writes:d.writes.filter(w=>w.id!=='${d.id}')}));rerender();toast('Deleted')}">Delete</button>
+      </div>`).join('')}`;
+}
+// ── TAB: RANKING ──
+function tabRanking(){
+  const allV=Object.entries(S.data).filter(([k])=>Object.keys(TF).includes(k)).flatMap(([type,items])=>items.filter(i=>i.visible).map(i=>({...i,type}))).sort((a,b)=>(b.likes||0)-(a.likes||0)).slice(0,25);
+  const bc={characters:'bdg-gh',poetry:'bdg-g',lore:'bdg-b',worlds:'bdg-gr',stories:'bdg-gh'};
+  return `
+    <div class="hero">
+      <div class="hero-eye">Community Voted</div>
+      <div class="hero-t" style="font-size:1.4rem">Hall of Highest Rank</div>
+      <div class="hero-s">Ranked by community likes. Updates in real time.</div>
+    </div>
+    <div class="ad"><span>ADVERTISEMENT · Google AdSense</span></div>
+    ${allV.length===0?`<div class="empty-v2"><div class="empty-v2-icon">▲</div><div class="empty-v2-title">The Hall of Rank awaits its first entry.</div><div class="empty-v2-sub">No content has been liked yet. Rankings emerge as the community engages.</div></div>`:''}
+    ${allV.length?`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+      ${allV.map((item,i)=>`
+        <div class="ri" onclick="openCard(${JSON.stringify(item).replace(/"/g,'&quot;')},null,false)">
+          <div style="font-weight:700;font-size:.96rem;color:${i<3?'var(--acc)':'var(--text3)'};min-width:24px">${String(i+1).padStart(2,'0')}</div>
+          <div style="font-size:1.05rem;min-width:24px">${esc(item.icon||'◈')}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700;font-size:.83rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(item.title)}</div>
+            <div style="font-family:monospace;font-size:.44rem;color:var(--text3);margin-top:3px">${esc(item.genre||'')}·By ${esc(item.author||'?')}</div>
+          </div>
+          <span class="bdg ${bc[item.type]||'bdg-gh'}">${esc(item.type)}</span>
+          <div style="font-weight:700;font-size:.92rem;color:var(--acc);min-width:36px;text-align:right">♥${item.likes||0}</div>
+        </div>`).join('')}
+    </div>`:''}`;
+}
+
+// ── TAB: SUGGESTIONS ──
+function tabSuggestions(){
+  const sugs=S.data.suggestions||[];
+  return `
+    <div class="hero">
+      <div class="hero-eye">Suggestion Box</div>
+      <div class="hero-t" style="font-size:1.4rem">Shape The Nexus</div>
+      <div class="hero-s">Got an idea for a feature, tab, or improvement? Submit it here. The community votes. The creator decides.</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem">
+      <div style="font-weight:700;font-size:.92rem;color:var(--text);margin-bottom:1rem">Submit Your Idea</div>
+      <div class="lbl">Title</div>
+      <input class="inp" id="sug-t" placeholder="Give your idea a clear title" style="margin-bottom:.75rem">
+      <div class="lbl">Description</div>
+      <textarea class="ta" id="sug-d" placeholder="Describe what you want and why it would help..."></textarea>
+      <div id="sugsent" style="font-family:monospace;font-size:.52rem;color:var(--green);margin:.5rem 0;display:none">✓ Submitted! The creator will review it.</div>
+      <div style="margin-top:.75rem"><button class="btn btn-g" onclick="submitSug()">💡 Submit Idea</button></div>
+    </div>
+    <div class="sec-hdr"><div class="sec-t">Community Ideas (${sugs.length})</div></div>
+    ${sugs.length===0?'<div class="empty"><div class="empty-s">No suggestions yet. Be the first.</div></div>':''}
+    ${sugs.slice().sort((a,b)=>(b.votes||0)-(a.votes||0)).map(sg=>`
+      <div class="scard">
+        <div class="sinner">
+          <div class="vcol">
+            <button class="vbtn" onclick="voteSug('${sg.id}')">▲</button>
+            <div class="vcnt">${sg.votes||0}</div>
+            <div class="vlbl">votes</div>
+          </div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;flex-wrap:wrap">
+              <div style="font-weight:700;font-size:.9rem;color:var(--text)">${esc(sg.title)}</div>
+              <span class="bdg ${sg.status==='approved'?'bdg-gr':sg.status==='rejected'?'bdg-r':'bdg-b'}">${sg.status||'pending'}</span>
+            </div>
+            <div style="font-size:.81rem;color:var(--text2);line-height:1.7;margin-bottom:.45rem">${esc(sg.desc||'')}</div>
+            <div style="font-family:monospace;font-size:.44rem;color:var(--text3)">By ${esc(sg.author||'Anonymous')} · ${new Date(sg.created).toLocaleDateString()}</div>
+          </div>
+        </div>
+      </div>`).join('')}`;
+}
+function submitSug(){
+  const title=document.getElementById('sug-t')?.value?.trim();const desc=document.getElementById('sug-d')?.value?.trim();
+  if(!title||!desc){toast('Fill in both fields');return;}
+  setData(d=>({...d,suggestions:[...(d.suggestions||[]),{id:Date.now().toString(),title,desc,author:S.creds.owner.user,votes:0,status:'pending',created:new Date().toISOString()}]}));
+  document.getElementById('sug-t').value='';document.getElementById('sug-d').value='';
+  const sent=document.getElementById('sugsent');if(sent){sent.style.display='block';setTimeout(()=>sent.style.display='none',3000);}
+  toast('✓ Idea submitted!');
+}
+function voteSug(id){
+  setData(d=>({...d,suggestions:d.suggestions.map(s=>s.id===id?{...s,votes:(s.votes||0)+1}:s)}));
+  rerender();
+}
+
+// ── TAB: COMMUNITY ──
+function tabCommunity(){
+  if(S.ui.subForm){return communityFormHTML();}
+  return `
+    <div class="ad"><span>ADVERTISEMENT · Google AdSense</span></div>
+    <div class="hero">
+      <div class="hero-eye">Community</div>
+      <div class="hero-t" style="font-size:1.4rem">Your work, your credit.</div>
+      <div class="hero-s">Submit characters, lore, poems, stories, and art. Full credit to you — your name on everything. All submissions reviewed by the creator before going live.</div>
+    </div>
+    ${!CU?`<div style="background:var(--accbg);border:1px solid var(--acc2);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem">
+      <div>
+        <div style="font-weight:700;font-size:.88rem;color:var(--acc);margin-bottom:.25rem">Sign in to submit your work</div>
+        <div style="font-size:.78rem;color:var(--text2)">Create a free account to submit characters, stories, poems, and art.</div>
+      </div>
+      <button class="btn btn-g" onclick="openAuth('register')">Create Account</button>
+    </div>`:''}
+    <div class="comgrid cgrid">
+      ${[
+        ['◈','Submit a Character','Name, world, abilities, danger level.','characters'],
+        ['◇','Submit a Poem','Any style, any genre, any nation.','poetry'],
+        ['✦','Submit Lore','Abilities, artifacts, systems, history.','lore'],
+        ['▷','Submit a Story','One-shots, chapters, full arcs.','stories'],
+        ['◎','Submit a World','Geography, factions, history.','worlds'],
+        ['✎','Write Here','Full writing studio — unlimited.','write']
+      ].map(([icon,title,desc,type])=>`
+        <div class="comcard" onclick="${type==='write'?`go('write')`:`openSubForm('${type}')`}">
+          <div style="font-size:1.5rem;margin-bottom:.6rem">${icon}</div>
+          <div style="font-weight:700;font-size:.84rem;color:var(--text);margin-bottom:.3rem">${title}</div>
+          <div style="font-size:.74rem;color:var(--text3);line-height:1.65">${desc}</div>
+        </div>`).join('')}
+    </div>
+    <div style="margin-top:1.75rem"><div class="ad"><span>ADVERTISEMENT · Google AdSense</span></div></div>`;}
+function openSubForm(type){
+  if(!CU){openAuth('login');toast('Sign in to submit content');return;}
+  S.ui.subForm={type,title:'',desc:'',genre:'',abilities:'',world:'',tags:'',quote:'',icon:'◈'};
+  rerender();
+}
+function communityFormHTML(){
+  const f=S.ui.subForm;const type=f.type;
+  const c=C2();
+  return `<div style="max-width:680px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:1.5rem">
+      <button class="btn btn-gh" onclick="S.ui.subForm=null;rerender()">← Back</button>
+      <div style="font-weight:700;font-size:1.05rem;color:var(--text)">Submit a ${TF[type]||type}</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:1.5rem">
+      <div class="lbl">Title *</div>
+      <input class="inp" id="sub-title" value="${esc(f.title)}" placeholder="${TF[type]||type} name..." oninput="S.ui.subForm.title=this.value" style="margin-bottom:.5rem">
+      <div class="lbl">Description *</div>
+      <textarea class="ta" id="sub-desc" placeholder="Describe your ${(TF[type]||type).toLowerCase()}..." oninput="S.ui.subForm.desc=this.value" style="margin-bottom:.5rem">${esc(f.desc)}</textarea>
+      ${type==='characters'?`
+        <div class="lbl">Abilities / Powers</div>
+        <input class="inp" id="sub-abilities" value="${esc(f.abilities)}" placeholder="List abilities separated by commas..." oninput="S.ui.subForm.abilities=this.value" style="margin-bottom:.5rem">
+        <div class="lbl">World / Setting</div>
+        <input class="inp" id="sub-world" value="${esc(f.world)}" placeholder="Which world do they belong to?" oninput="S.ui.subForm.world=this.value" style="margin-bottom:.5rem">
+        <div class="lbl">Signature Quote</div>
+        <input class="inp" id="sub-quote" value="${esc(f.quote||'')}" placeholder="A quote or line that defines them..." oninput="S.ui.subForm.quote=this.value" style="margin-bottom:.5rem">
+        <div class="lbl">Icon</div>
+        <input class="inp" id="sub-icon" value="${esc(f.icon)}" placeholder="◈" oninput="S.ui.subForm.icon=this.value" style="max-width:80px;margin-bottom:.5rem">
+      `:''}
+      ${type==='worlds'?`
+        <div class="lbl">Notable Locations</div>
+        <input class="inp" id="sub-world" value="${esc(f.world)}" placeholder="Key places in this world..." oninput="S.ui.subForm.world=this.value" style="margin-bottom:.5rem">
+      `:''}
+      <div class="lbl">Genre</div>
+      <select class="sel" id="sub-genre" onchange="S.ui.subForm.genre=this.value" style="margin-bottom:.5rem">
+        <option value="">Select genre</option>
+        ${(GE[type]||[]).map(g=>`<option value="${g}" ${f.genre===g?'selected':''}>${g}</option>`).join('')}
+      </select>
+      <div class="lbl">Tags (comma separated)</div>
+      <input class="inp" id="sub-tags" value="${esc(f.tags)}" placeholder="dark, fantasy, original..." oninput="S.ui.subForm.tags=this.value" style="margin-bottom:.85rem">
+      <div style="background:var(--accbg);border:1px solid var(--acc2);border-radius:8px;padding:.75rem 1rem;margin-bottom:1rem;font-size:.78rem;color:var(--text2);line-height:1.65">
+        By submitting you confirm this is your original work and you agree to The Nexus content licence. The creator reviews all submissions before they go live.
+      </div>
+      <div id="sub-err" style="color:var(--red);font-family:monospace;font-size:.52rem;margin-bottom:.65rem;display:none"></div>
+      <div style="display:flex;gap:.65rem">
+        <button class="btn btn-g" onclick="submitContent()">Submit for Review</button>
+        <button class="btn btn-gh" onclick="S.ui.subForm=null;rerender()">Cancel</button>
+      </div>
+    </div>
+  </div>`;}
+function C2(){return {};}
+function submitContent(){
+  const f=S.ui.subForm;
+  if(!f.title?.trim()||!f.desc?.trim()){const e=document.getElementById('sub-err');if(e){e.textContent='Title and description are required.';e.style.display='block';}return;}
+  if(f.title.trim().length<3){const e=document.getElementById('sub-err');if(e){e.textContent='Title must be at least 3 characters.';e.style.display='block';}return;}
+  if(f.title.trim().length>100){const e=document.getElementById('sub-err');if(e){e.textContent='Title too long (max 100 characters).';e.style.display='block';}return;}
+  if(f.desc.trim().length>5000){const e=document.getElementById('sub-err');if(e){e.textContent='Description too long (max 5000 characters).';e.style.display='block';}return;}
+  // Rate limit: one submission per 60 seconds
+  const lastSub=parseInt(localStorage.getItem('nx:lastsub')||'0');
+  if(Date.now()-lastSub<60000){const e=document.getElementById('sub-err');if(e){e.textContent='Please wait before submitting again.';e.style.display='block';}return;}
+  if(!CU){openAuth('login');return;}
+  const sub={id:Date.now().toString(),type:f.type,title:f.title.trim(),desc:f.desc.trim(),abilities:f.abilities||'',world:f.world||'',quote:f.quote||'',icon:f.icon||'◈',genre:f.genre||'',tags:(f.tags||'').split(',').map(t=>t.trim()).filter(Boolean).slice(0,10),author:CU.name,authorId:CU.id,created:new Date().toISOString(),likes:0,visible:false};
+  setData(d=>({...d,pending:[...(d.pending||[]),sub]}));
+  localStorage.setItem('nx:lastsub',Date.now().toString());
+  S.ui.subForm=null;toast('✓ Submitted! The creator will review your work.');rerender();
+}
+
+// ── TAB: MESSAGES ──
+function tabMessages(){
+  const contacts=(S.data.users||[]).filter(u=>u.id!=='hunter');
+  const active=S.ui.activeDM;
+  const dmKey=active?['Hunter',active].sort().join('_'):null;
+  const messages=dmKey?(S.data.dms?.[dmKey]||[]):[];
+  return `
+    <div class="msglayout">
+      <div class="msgcon">
+        <div style="padding:.88rem 1rem;border-bottom:1px solid var(--border);font-weight:700;font-size:.84rem;color:var(--text)">Messages</div>
+        <div style="flex:1;overflow-y:auto">
+          ${contacts.length===0?'<div style="padding:2rem;text-align:center;color:var(--text3);font-family:monospace;font-size:.53rem">No users yet.</div>':''}
+          ${contacts.map(u=>`
+            <div class="msgci ${active===u.name?'on':''}" onclick="S.ui.activeDM='${esc(u.name)}';rerender()">
+              <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff;flex-shrink:0">${u.name[0].toUpperCase()}</div>
+              <div>
+                <div style="font-weight:700;font-size:.8rem;color:${active===u.name?'var(--acc)':'var(--text)'}">${esc(u.name)}</div>
+                <div style="font-family:monospace;font-size:.44rem;color:var(--text3)">${u.role}</div>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="msgch">
+        ${!active?`<div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--text3);font-family:monospace;font-size:.57rem">Select a contact to start chatting</div>`:`
+          <div style="padding:.88rem 1rem;border-bottom:1px solid var(--border);font-weight:700;font-size:.87rem;color:var(--text)">@ ${esc(active)}</div>
+          <div class="msgms" id="msglist">
+            ${messages.length===0?'<div style="text-align:center;padding:2rem;color:var(--text3);font-family:monospace;font-size:.53rem">No messages yet.</div>':''}
+            ${messages.map(m=>`
+              <div class="mbw ${m.from==='Hunter'?'mine':'theirs'}">
+                <div class="mbub">${esc(m.text)}</div>
+                <div class="mtime">${new Date(m.time).toLocaleTimeString()}</div>
+              </div>`).join('')}
+          </div>
+          <div style="padding:.72rem;border-top:1px solid var(--border);display:flex;gap:.42rem">
+            <input class="inp" id="dminp" placeholder="Message ${esc(active)}..." onkeydown="if(event.key==='Enter')sendDM()" style="flex:1">
+            <button class="btn btn-g" onclick="sendDM()">Send</button>
+          </div>`}
+      </div>
+    </div>`;
+}
+function sendDM(){
+  const inp=document.getElementById('dminp');const text=inp?.value?.trim();const active=S.ui.activeDM;
+  if(!text||!active)return;
+  const key=['Hunter',active].sort().join('_');
+  const msg={id:Date.now().toString(),from:'Hunter',text,time:new Date().toISOString()};
+  setData(d=>({...d,dms:{...d.dms,[key]:[...(d.dms[key]||[]),msg]}}));
+  inp.value='';rerender();
+  setTimeout(()=>{const list=document.getElementById('msglist');if(list)list.scrollTop=list.scrollHeight;},50);
+}
+
+// ── TAB: PRIVACY ──
+function tabPrivacy(){
+  return `<div style="max-width:740px;margin:0 auto">
+    <div style="font-weight:700;font-size:1.4rem;color:var(--text);margin-bottom:.5rem">Privacy Policy</div>
+    <div style="font-family:monospace;font-size:.49rem;color:var(--text3);margin-bottom:2rem">Last updated: ${new Date().getFullYear()} · Effective immediately upon first use</div>
+    ${[
+      ['1. Introduction','The Nexus ("we", "us", "our", "the platform") is a creative universe platform operated by its owner. This Privacy Policy explains how we collect, use, store, and protect information when you access or use The Nexus. By using the platform you expressly consent to the practices described in this policy. If you do not agree, do not use the platform.'],
+      ['2. Information We Collect','We collect: (a) content you voluntarily submit including characters, stories, poems, artwork, lore, and any other creative material; (b) your chosen username and any optional biography; (c) aggregated, anonymous usage data including page visits, tab interactions, and session duration; (d) device and browser information for platform functionality. We do not require or collect your real name, email address, phone number, or any government-issued identification.'],
+      ['3. How We Use Your Information','We use collected information to: operate, display, and improve the platform; personalise your experience; serve advertisements through Google AdSense; understand how the platform is being used; enforce our Terms of Service and community standards; and communicate platform updates and announcements. We may also use anonymised, aggregated data for internal analytics and promotional purposes.'],
+      ['4. Content Licence & Usage Rights','By submitting any content to The Nexus — including but not limited to characters, stories, poems, artwork, designs, world descriptions, lore entries, and any other creative material — you grant The Nexus and its owner(s) a perpetual, irrevocable, worldwide, royalty-free, sub-licensable, transferable licence to use, display, reproduce, distribute, adapt, modify, translate, create derivative works from, publicly perform, publicly display, and otherwise exploit such content in any form or medium, for any purpose including but not limited to promotional, commercial, marketing, social media, partnership, derivative works, and other exploitation — without compensation, credit obligation, or further consent required. You represent that you have all rights necessary to grant this licence and that your content does not infringe any third party rights.'],
+      ['5. Data Storage & Security','All platform data is stored in your browser\'s local storage on your device. This data is not automatically transmitted to our servers. However, content you submit to the public platform becomes accessible to other users and to the platform owner. We implement reasonable security measures but cannot guarantee absolute security. You are responsible for maintaining the confidentiality of your account credentials.'],
+      ['6. Third-Party Services & Advertising','The Nexus uses Google AdSense to display advertisements. Google and its partners may use cookies, web beacons, and similar technologies to serve ads based on your browsing behaviour. By using the platform you consent to Google\'s use of advertising cookies. You may opt out of personalised advertising at Google\'s Ad Settings. We are not responsible for the content or privacy practices of third-party advertisers.'],
+      ['7. Cookies','We use essential cookies for platform functionality and analytics cookies to understand usage patterns. Advertising cookies are used by Google AdSense. By agreeing to this policy you consent to the use of all cookies described. You may manage cookie preferences through your browser settings, though disabling certain cookies may affect platform functionality.'],
+      ['8. Mature Content','The Nexus hosts content rated 18+. By confirming your age during the consent process you take full responsibility for accessing age-restricted material. We are not liable for any exposure to mature content that results from misrepresentation of age.'],
+      ['9. Children\'s Privacy','The Nexus is not directed at individuals under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided personal information, we will delete it promptly. If you believe a child under 13 has used the platform, please contact the platform owner immediately.'],
+      ['10. Your Rights','You may request deletion of your account and associated content at any time by contacting the platform owner. Content that has been incorporated into derivative works, promotions, or published materials under the content licence in Section 4 may not be fully removable. We will honour deletion requests to the extent technically and legally feasible.'],
+      ['11. Changes to This Policy','We reserve the right to update this Privacy Policy at any time without prior notice. Continued use of the platform after any changes constitutes acceptance of the updated policy. It is your responsibility to review this policy periodically.']
+    ].map(([h,t])=>`<div class="lg-sec"><div class="lg-h">${esc(h)}</div><p class="lg-t">${esc(t)}</p></div>`).join('')}
+  </div>`;
+}
+
+// ── TAB: TERMS ──
+function tabTerms(){
+  const secs=[
+    ["1. Acceptance","By using The Nexus you agree to these Terms in full. We may modify them at any time. Continued use means acceptance."],
+    ["2. Platform Licence","You get a limited, personal, non-commercial licence to use the platform. No scraping, reselling, or exploiting platform systems."],
+    ["3. Content Licence","By submitting anything — characters, stories, poems, artwork, lore — you grant The Nexus a perpetual, worldwide, royalty-free, sublicensable licence to use, display, reproduce, adapt, distribute, and commercially exploit your content in any form, without compensation. This survives account deletion."],
+    ["4. Your Ownership","You keep copyright. But by submitting you confirm it is your original work and does not infringe anyone else."],
+    ["5. Prohibited Content","No copyright infringement, harassment, illegal content, spam, impersonation, content targeting minors, or platform manipulation."],
+    ["6. Mature Content","18+ content must be tagged. Misrepresenting your age is your legal responsibility, not ours."],
+    ["7. Accounts","Keep your credentials safe. You are responsible for all activity on your account. We can terminate any account at our sole discretion."],
+    ["8. Moderation","We have absolute final discretion to remove content, suspend accounts, or take the platform offline — no notice, no appeal, no liability."],
+    ["9. No Warranties","Platform is provided as-is. No guarantees of uptime, security, or data preservation. Use at your own risk."],
+    ["10. Limitation of Liability","We are not liable for any indirect, incidental, or consequential damages. Maximum liability is $1 USD."],
+    ["11. Indemnification","You agree to indemnify The Nexus from any claims arising from your content or your use of the platform."],
+    ["12. Advertising","We display ads via Google AdSense. Advertisers have no editorial influence."],
+    ["13. Governing Law","Disputes are settled through good-faith negotiation first. Class actions are waived."]
+  ];
+  let html="<div style=\"max-width:740px;margin:0 auto\">";
+  html+="<div style=\"font-weight:700;font-size:1.4rem;color:var(--text);margin-bottom:.5rem\">Terms of Service</div>";
+  html+="<div style=\"font-family:monospace;font-size:.49rem;color:var(--text3);margin-bottom:2rem\">Last updated: "+new Date().getFullYear()+" · By using The Nexus you agree to all terms below in full.</div>";
+  secs.forEach(function(s){html+="<div class=\"lg-sec\"><div class=\"lg-h\">"+s[0]+"</div><p class=\"lg-t\">"+s[1]+"</p></div>";});
+  html+="</div>";
+  return html;
+}
+
+function updateGenreSelect(type){const el=document.getElementById('wgenre');if(!el)return;el.innerHTML='<option value="">Genre...</option>'+(GE[type]||[]).map(g=>'<option>'+g+'</option>').join('');}
+// ── RENDER SYSTEM ──
+function getTab(tab){
+  switch(tab){
+    case 'home':return tabHome();
+    case 'library':return tabLibrary();
+    case 'characters':return tabCharacters();
+    case 'worlds':return tabGrid('worlds');
+    case 'lore':return tabGrid('lore');
+    case 'poetry':return tabPoetry();
+    case 'stories':return tabGrid('stories');
+    case 'designs':return tabDesigns();
+    case 'write':return tabWrite();
+    case 'drafts':return tabDrafts();
+    case 'ranking':return tabRanking();
+    case 'suggest':return tabSuggestions();
+    case 'community':return tabCommunity();
+    case 'messages':return tabMessages();
+    case 'privacy':return tabPrivacy();
+    case 'terms':return tabTerms();
+    default:return tabHome();
+  }
+}
+function buildSidebar(){
+  const sb=document.getElementById('sb');const isOpen=S.sbOpen;
+  sb.className=isOpen?'':'col';
+  document.getElementById('sbrand').style.display=isOpen?'block':'none';
+  document.getElementById('sbsrch').style.display=isOpen?'block':'none';
+  document.getElementById('uinfo').style.display=isOpen?'block':'none';
+  document.getElementById('strbar').style.display=isOpen&&S.settings.streaks?'flex':'none';
+  document.getElementById('sbtog').textContent=isOpen?'◀':'▶';
+  const secs=['explore','create','community','legal'];
+  document.getElementById('sbnav').innerHTML=secs.map(sec=>{
+    const tabs=TABS.filter(t=>t.sec===sec);
+    const lbl=isOpen?`<div class="sb-sec">${sec}</div>`:'<div style="border-top:1px solid var(--border)"></div>';
+    const skip=['write','drafts','messages','privacy','terms','library','suggest'];
+    const items=tabs.map(t=>{
+      const cnt=!skip.includes(t.id)?(vis(t.id)?.length||0):0;
+      const on=S.tab===t.id;
+      return `<div class="ni${on?' on':''}" onclick="go('${t.id}')">
+        <span class="ni-ico">${t.icon}</span>
+        ${isOpen?`<span class="nl">${t.label}</span>`:''}
+        ${isOpen&&cnt>0?`<span class="nc">${cnt}</span>`:''}
+      </div>`;
+    }).join('');
+    return lbl+items;
+  }).join('');
+  document.getElementById('mobnav').innerHTML=MOBT.map(t=>`
+    <button class="mb${S.tab===t.id?' on':''}" onclick="go('${t.id}')">
+      <span class="mbi">${t.icon}</span>
+      <span class="mbl">${t.label}</span>
+    </button>`).join('')+`<button class="mb" onclick="CU?openAuth('profile'):openAuth('login')" style="color:${CU?'var(--acc)':'var(--text3)'}">
+      <span class="mbi">${CU?CU.name[0].toUpperCase():'👤'}</span>
+      <span class="mbl">${CU?'Account':'Sign In'}</span>
+    </button>`;
+  // Auth button — always present in footer
+  const uav=document.getElementById('uav');
+  const uname=document.getElementById('uname');
+  const urole=document.querySelector('#uinfo .ur');
+  if(CU){
+    if(uav){uav.textContent=CU.name[0].toUpperCase();uav.style.background=CU.avatar||'var(--acc)';}
+    if(uname)uname.textContent=CU.name;
+    if(urole)urole.textContent=CU.role==='owner'?'Creator':CU.role;
+  } else {
+    if(uav){uav.textContent='?';uav.style.background='var(--border2)';}
+    if(uname)uname.textContent='Guest';
+    if(urole)urole.textContent='Not signed in';
+  }
+  let authBtn=document.getElementById('sb-auth-btn');
+  if(!authBtn){
+    authBtn=document.createElement('button');
+    authBtn.id='sb-auth-btn';
+    authBtn.style.cssText='width:100%;margin-top:.5rem;padding:.32rem;font-size:.65rem;font-weight:700;border-radius:7px;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;transition:all .15s;';
+    document.querySelector('.sb-foot').appendChild(authBtn);
+  }
+  authBtn.textContent=CU?'Sign Out':'Sign In / Register';
+  authBtn.onclick=()=>CU?logoutUser():openAuth('login');
+  authBtn.style.display=isOpen?'block':'none';
+}
+function render(){
+  applyTheme();
+  buildSidebar();
+  document.getElementById('tbtitle').textContent=TITLES[S.tab]||S.tab;
+  // admin dot removed
+  document.getElementById('content').innerHTML=`<div class="fade">${getTab(S.tab)}</div>`;
+  updateStreak();updateUser();
+}
+function rerender(){render();}
+
+// ── CONSENT SYSTEM ──
+function checkConsent(){
+  if(!ld(K.con)){
+    document.getElementById('consent-modal').style.display='flex';
+    return false;
+  }
+  return true;
+}
+function giveConsent(){
+  const c1=document.getElementById('ck1')?.checked;
+  const c2=document.getElementById('ck2')?.checked;
+  const c3=document.getElementById('ck3')?.checked;
+  if(!c1||!c2||!c3){
+    const err=document.getElementById('consent-err');
+    if(err)err.style.display='block';
+    return;
+  }
+  sv(K.con,{agreed:true,date:new Date().toISOString()});
+  document.getElementById('consent-modal').style.display='none';
+  initApp();
+}
+
+// ── AUTH SYSTEM ──
+let CU=null; // current user
+function loadUsers(){return ld(K.users)||[];}
+function saveUsers(users){sv(K.users,users);}
+function hashPass(p){let h=0;for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h|=0;}return h.toString(36);}
+function registerUser(name,pass,bio=''){
+  const users=loadUsers();
+  if(users.find(u=>u.name.toLowerCase()===name.toLowerCase()))return{err:'Username already taken.'};
+  if(name.length<3)return{err:'Username must be at least 3 characters.'};
+  if(pass.length<6)return{err:'Password must be at least 6 characters.'};
+  const user={id:Date.now().toString(),name,pass:hashPass(pass),bio,role:'member',status:'active',joined:new Date().toISOString(),avatar:['#e8b84b','#5a9ef8','#a78bfa','#4ade80','#e05555','#f472b6'][Math.floor(Math.random()*6)]};
+  users.push(user);saveUsers(users);
+  CU={...user};sv(K.cu,CU);
+  updateAuthUI();
+  return{ok:true,user};
+}
+function loginUser(name,pass){
+  const users=loadUsers();
+  const user=users.find(u=>u.name.toLowerCase()===name.toLowerCase());
+  if(!user)return{err:'User not found.'};
+  if(user.status==='suspended')return{err:'This account has been suspended.'};
+  if(user.pass!==hashPass(pass))return{err:'Wrong password.'};
+  CU={...user};sv(K.cu,CU);
+  updateAuthUI();
+  return{ok:true,user};
+}
+function logoutUser(){CU=null;sv(K.cu,null);updateAuthUI();rerender();}
+function isLoggedIn(){return!!CU;}
+function _authUIPlaceholder(){// removed
+}
+function openAuth(tab='login'){
+  if(tab==='profile'&&CU){
+    const root=document.getElementById('auth-root');
+    root.innerHTML=`<div class="auth-modal" onclick="if(event.target===this)closeAuth()"><div class="auth-box"><div class="auth-tabs"><button class="auth-tab on">My Account</button><button class="auth-tab" onclick="logoutUser();closeAuth()">Sign Out</button></div><div class="auth-body"><div class="user-bar"><div class="ubar-av" style="background:${CU.avatar||'var(--acc)'}">${CU.name[0].toUpperCase()}</div><div><div class="ubar-name">${esc(CU.name)}</div><div class="ubar-role">${CU.role}</div></div></div><div style="font-size:.82rem;color:var(--text2);line-height:1.75">${CU.bio?`"${esc(CU.bio)}"`:'No bio yet.'}</div><div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-family:monospace;font-size:.48rem;color:var(--text3)">Joined: ${new Date(CU.joined).toLocaleDateString()}</div></div></div></div>`;
+    return;
+  }
+  const root=document.getElementById('auth-root');
+  root.innerHTML=`
+    <div class="auth-modal" onclick="if(event.target===this)closeAuth()">
+      <div class="auth-box">
+        <div class="auth-tabs">
+          <button class="auth-tab ${tab==='login'?'on':''}" onclick="openAuth('login')">Sign In</button>
+          <button class="auth-tab ${tab==='register'?'on':''}" onclick="openAuth('register')">Create Account</button>
+        </div>
+        <div class="auth-body">
+          ${tab==='login'?`
+            <div style="text-align:center;margin-bottom:1.25rem">
+              <div style="font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:.3rem">Welcome back</div>
+              <div style="font-family:monospace;font-size:.5rem;color:var(--text3)">Sign in to submit content and interact</div>
+            </div>
+            <div class="lbl">Username</div><input class="inp" id="li-name" placeholder="Your username" style="margin-bottom:.5rem" onkeydown="if(event.key==='Enter')doLogin2()">
+            <div class="lbl">Password</div>
+            <div class="pw-w" style="margin-bottom:.75rem"><input class="inp" id="li-pass" type="password" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin2()"><button class="pw-tog" onclick="pwTog('li-pass',this)">👁</button></div>
+            <div id="li-err" style="color:var(--red);font-family:monospace;font-size:.52rem;margin-bottom:.65rem;display:none"></div>
+            <button class="btn btn-g" style="width:100%;justify-content:center" onclick="doLogin2()">Sign In</button>
+            <div style="text-align:center;margin-top:.85rem;font-family:monospace;font-size:.5rem;color:var(--text3)">No account? <span style="color:var(--acc);cursor:pointer" onclick="openAuth('register')">Create one →</span></div>
+          `:`
+            <div style="text-align:center;margin-bottom:1.25rem">
+              <div style="font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:.3rem">Join The Nexus</div>
+              <div style="font-family:monospace;font-size:.5rem;color:var(--text3)">Create an account to submit your work</div>
+            </div>
+            <div class="lbl">Username</div><input class="inp" id="reg-name" placeholder="Choose a username" style="margin-bottom:.5rem">
+            <div class="lbl">Password</div>
+            <div class="pw-w" style="margin-bottom:.5rem"><input class="inp" id="reg-pass" type="password" placeholder="At least 6 characters"><button class="pw-tog" onclick="pwTog('reg-pass',this)">👁</button></div>
+            <div class="lbl">Confirm Password</div>
+            <div class="pw-w" style="margin-bottom:.5rem"><input class="inp" id="reg-cp" type="password" placeholder="Confirm"><button class="pw-tog" onclick="pwTog('reg-cp',this)">👁</button></div>
+            <div class="lbl">Bio (optional)</div><input class="inp" id="reg-bio" placeholder="Short bio..." style="margin-bottom:.75rem">
+            <div id="reg-err" style="color:var(--red);font-family:monospace;font-size:.52rem;margin-bottom:.65rem;display:none"></div>
+            <button class="btn btn-g" style="width:100%;justify-content:center" onclick="doRegister()">Create Account</button>
+            <div style="text-align:center;margin-top:.85rem;font-family:monospace;font-size:.48rem;color:var(--text3)">By registering you agree to the <span style="color:var(--acc);cursor:pointer" onclick="go('terms');closeAuth()">Terms of Service</span> including the content licence.</div>
+          `}
+        </div>
+      </div>
+    </div>`;
+}
+function closeAuth(){document.getElementById('auth-root').innerHTML='';}
+function doLogin2(){
+  const name=document.getElementById('li-name')?.value?.trim();
+  const pass=document.getElementById('li-pass')?.value;
+  const res=loginUser(name,pass);
+  if(res.err){const e=document.getElementById('li-err');if(e){e.textContent=res.err;e.style.display='block';}return;}
+  closeAuth();toast('✓ Welcome back, '+CU.name+'!');rerender();
+}
+function doRegister(){
+  const name=document.getElementById('reg-name')?.value?.trim();
+  const pass=document.getElementById('reg-pass')?.value;
+  const cp=document.getElementById('reg-cp')?.value;
+  const bio=document.getElementById('reg-bio')?.value||'';
+  if(pass!==cp){const e=document.getElementById('reg-err');if(e){e.textContent="Passwords don't match.";e.style.display='block';}return;}
+  const res=registerUser(name,pass,bio);
+  if(res.err){const e=document.getElementById('reg-err');if(e){e.textContent=res.err;e.style.display='block';}return;}
+  closeAuth();toast('✓ Account created! Welcome, '+CU.name+'!');rerender();
+}
+
+// ── OVERPOWERED ADMIN SECTIONS ──
+function adminIntelHTML(){
+  const data=S.data;
+  const allContent=Object.keys(TF).flatMap(t=>(data[t]||[]).map(i=>({...i,_type:t})));
+  const topContent=[...allContent].sort((a,b)=>(b.likes||0)-(a.likes||0)).slice(0,10);
+  const recentContent=[...allContent].sort((a,b)=>new Date(b.created||0)-new Date(a.created||0)).slice(0,5);
+  const users=loadUsers();
+  const suspended=users.filter(u=>u.status==='suspended');
+  const allDrafts=data.writes||[];
+  const totalLikes=allContent.reduce((a,i)=>a+(i.likes||0),0);
+  return `
+    <div style="font-family:monospace;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:1rem">Platform Intelligence</div>
+    <div class="intel-grid">
+      ${[['Total Content',allContent.length],['Total Likes',totalLikes],['Registered Users',users.length],['Drafts',allDrafts.length],['Pending',( data.pending||[]).length],['Visits Today',S.vToday]].map(([l,n])=>`
+        <div class="intel-card"><div class="intel-num">${n}</div><div class="intel-label">${esc(l)}</div></div>`).join('')}
+    </div>
+    ${topContent.length?`
+      <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.75rem;margin-top:.5rem">🏆 Top Content by Likes</div>
+      ${topContent.map((item,i)=>`
+        <div class="top-item">
+          <div class="top-rank">#${i+1}</div>
+          <div class="top-info">
+            <div class="top-title">${esc(item.title)}</div>
+            <div class="top-meta">${esc(item._type)} · By ${esc(item.author||'?')}</div>
+          </div>
+          <div class="top-stat">♥${item.likes||0}</div>
+        </div>`).join('')}`:''}
+    ${recentContent.length?`
+      <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.75rem;margin-top:1.25rem">⏱ Most Recent</div>
+      ${recentContent.map(item=>`
+        <div class="top-item">
+          <div class="top-info">
+            <div class="top-title">${esc(item.title)}</div>
+            <div class="top-meta">${esc(item._type)} · ${new Date(item.created).toLocaleDateString()}</div>
+          </div>
+          <span class="bdg ${item.visible?'bdg-gr':'bdg-r'}">${item.visible?'Live':'Hidden'}</span>
+        </div>`).join('')}`:''}
+    ${allDrafts.length?`
+      <div style="font-weight:700;font-size:.9rem;color:var(--text);margin-bottom:.75rem;margin-top:1.25rem">📋 All Drafts</div>
+      ${allDrafts.map(d=>`
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.75rem .9rem;margin-bottom:.42rem;cursor:pointer" onclick="S.admin.previewDraft='${d.id}';S.admin.sec='drafts';renderAdmin()">
+          <div style="font-weight:700;font-size:.8rem;color:var(--text);margin-bottom:3px">${esc(d.title)}</div>
+          <div style="font-family:monospace;font-size:.44rem;color:var(--text3)">${d.wc||0} words · By ${esc(d.author||'?')} · ${new Date(d.created).toLocaleDateString()}</div>
+        </div>`).join('')}`:''}
+    ${suspended.length?`
+      <div style="font-weight:700;font-size:.9rem;color:var(--red);margin-bottom:.75rem;margin-top:1.25rem">🚫 Suspended Accounts (${suspended.length})</div>
+      ${suspended.map(u=>`
+        <div class="sus-item">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="font-weight:700;font-size:.8rem;color:var(--red)">${esc(u.name)}</div>
+            <button class="btn btn-sm btn-gr" onclick="unsuspendUser('${u.id}')">Unsuspend</button>
+          </div>
+          ${u.suspendReason?`<div class="sus-reason">Reason: ${esc(u.suspendReason)}</div>`:''}
+        </div>`).join('')}`:''}`;
+}
+function adminDraftHTML(){
+  const data=S.data;const allDrafts=data.writes||[];
+  const previewId=S.admin.previewDraft;
+  const draft=previewId?allDrafts.find(d=>d.id===previewId):null;
+  if(draft)return `
+    <button class="btn btn-gh" style="margin-bottom:1rem" onclick="S.admin.previewDraft=null;S.admin.sec='intel';renderAdmin()">← Back to Intelligence</button>
+    <div style="font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:.5rem">${esc(draft.title)}</div>
+    <div style="font-family:monospace;font-size:.46rem;color:var(--text3);margin-bottom:1.25rem">${draft.wc||0} words · By ${esc(draft.author||'?')} · ${new Date(draft.created).toLocaleDateString()} · ${esc(draft.genre||'No genre')}</div>
+    ${draft.cover?`<img src="${draft.cover}" style="width:100%;border-radius:10px;margin-bottom:1.25rem;max-height:180px;object-fit:cover" loading="lazy">`:''}
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;color:var(--text);font-size:.87rem;line-height:1.9">${draft.content||'<em style="color:var(--text3)">Empty draft</em>'}</div>
+    <div style="margin-top:1rem;display:flex;gap:.5rem">
+      <button class="btn btn-g" onclick="publishDraft('${draft.id}')">✓ Publish to Library</button>
+      <button class="btn btn-r" onclick="if(confirm('Delete this draft?')){deleteDraft('${draft.id}')}">Delete Draft</button>
+    </div>`;
+  return `
+    <div style="font-family:monospace;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:1rem">All Drafts (${allDrafts.length})</div>
+    ${allDrafts.length===0?'<div class="empty-v2"><div class="empty-v2-sub">No drafts submitted yet.</div></div>':''}
+    ${allDrafts.map(d=>`
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.85rem .9rem;margin-bottom:.42rem;display:flex;align-items:flex-start;gap:.75rem">
+        ${d.cover?`<img src="${d.cover}" style="width:52px;height:52px;border-radius:7px;object-fit:cover;flex-shrink:0" loading="lazy">`:'<div style="width:52px;height:52px;border-radius:7px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">✎</div>'}
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:.82rem;color:var(--text);margin-bottom:3px">${esc(d.title)}</div>
+          <div style="font-family:monospace;font-size:.44rem;color:var(--text3);margin-bottom:.5rem">${d.wc||0} words · By ${esc(d.author||'?')} · ${new Date(d.created).toLocaleDateString()}</div>
+          <div style="display:flex;gap:.4rem">
+            <button class="btn btn-sm btn-gh" onclick="S.admin.previewDraft='${d.id}';renderAdmin()">Preview</button>
+            <button class="btn btn-sm btn-g" onclick="publishDraft('${d.id}')">Publish</button>
+            <button class="btn btn-sm btn-r" onclick="if(confirm('Delete?')){deleteDraft('${d.id}')}">Delete</button>
+          </div>
+        </div>
+      </div>`).join('')}`;
+}
+function publishDraft(id){
+  const draft=(S.data.writes||[]).find(d=>d.id===id);if(!draft)return;
+  const{icon,wc,cover,...item}=draft;
+  setData(d=>({...d,[draft.type]:[...(d[draft.type]||[]),{...item,visible:true,likes:0,created:new Date().toISOString()}],writes:d.writes.filter(w=>w.id!==id)}));
+  S.admin.previewDraft=null;S.admin.sec='intel';
+  toast('✓ Published to '+draft.type+'!');renderAdmin();rerender();
+}
+function deleteDraft(id){
+  setData(d=>({...d,writes:d.writes.filter(w=>w.id!==id)}));
+  S.admin.previewDraft=null;toast('Draft deleted.');renderAdmin();
+}
+function adminUsersFullHTML(){
+  const users=loadUsers();
+  return `
+    <div style="font-family:monospace;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:1rem">User Management (${users.length} accounts)</div>
+    ${users.length===0?'<div class="empty-v2"><div class="empty-v2-sub">No registered users yet.</div></div>':''}
+    ${users.map(u=>`
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.9rem 1rem;margin-bottom:.5rem">
+        <div style="display:flex;align-items:center;gap:.65rem;margin-bottom:${u.bio||u.suspendReason?'.5rem':'0'}">
+          <div style="width:30px;height:30px;border-radius:50%;background:${u.avatar||'var(--border2)'};display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#fff;flex-shrink:0">${u.name[0].toUpperCase()}</div>
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:.82rem;color:var(--text)">${esc(u.name)}</div>
+            <div style="font-family:monospace;font-size:.44rem;color:var(--text3)">${u.role} · Joined ${new Date(u.joined).toLocaleDateString()}</div>
+          </div>
+          <span class="bdg ${u.status==='suspended'?'bdg-r':u.status==='blocked'?'bdg-r':u.role==='owner'?'bdg-g':'bdg-gr'}">${u.status==='suspended'?'Suspended':u.status==='blocked'?'Blocked':u.role}</span>
+        </div>
+        ${u.bio?`<div style="font-size:.75rem;color:var(--text2);margin-bottom:.5rem;font-style:italic">"${esc(u.bio)}"</div>`:''}
+        ${u.suspendReason?`<div style="font-family:monospace;font-size:.45rem;color:var(--red);margin-bottom:.5rem">Suspended: ${esc(u.suspendReason)}</div>`:''}
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+          ${u.status!=='suspended'?`<button class="btn btn-sm btn-r" onclick="promptSuspend('${u.id}')">🚫 Suspend</button>`:`<button class="btn btn-sm btn-gr" onclick="unsuspendUser('${u.id}')">✓ Unsuspend</button>`}
+          ${u.status!=='blocked'?`<button class="btn btn-sm btn-r" onclick="blockUser('${u.id}')">Block</button>`:`<button class="btn btn-sm btn-gr" onclick="unblockUser('${u.id}')">Unblock</button>`}
+          <button class="btn btn-sm btn-gh" onclick="promoteUser('${u.id}')">${u.role==='admin'?'Demote':'Make Admin'}</button>
+          <button class="btn btn-sm btn-r" onclick="if(confirm('Permanently delete this account?')){deleteUser('${u.id}')}">Delete</button>
+        </div>
+      </div>`).join('')}`;
+}
+function promptSuspend(id){
+  const reason=prompt('Reason for suspension (visible in logs):');
+  if(reason===null)return;
+  const users=loadUsers();
+  const updated=users.map(u=>u.id===id?{...u,status:'suspended',suspendReason:reason||'No reason given',suspendedAt:new Date().toISOString()}:u);
+  saveUsers(updated);toast('Account suspended.');renderAdmin();
+}
+function unsuspendUser(id){const users=loadUsers();saveUsers(users.map(u=>u.id===id?{...u,status:'active',suspendReason:'',suspendedAt:''}:u));toast('Account unsuspended.');renderAdmin();}
+function blockUser(id){const users=loadUsers();saveUsers(users.map(u=>u.id===id?{...u,status:'blocked'}:u));toast('Account blocked.');renderAdmin();}
+function unblockUser(id){const users=loadUsers();saveUsers(users.map(u=>u.id===id?{...u,status:'active'}:u));toast('Account unblocked.');renderAdmin();}
+function promoteUser(id){const users=loadUsers();saveUsers(users.map(u=>u.id===id?{...u,role:u.role==='admin'?'member':'admin'}:u));toast('Role updated.');renderAdmin();}
+function deleteUser(id){saveUsers(loadUsers().filter(u=>u.id!==id));if(CU?.id===id){CU=null;sv(K.cu,null);updateAuthUI();}toast('Account deleted.');renderAdmin();}
+
+// ── INIT ──
+// ── SEARCH (preserves keyboard focus on mobile) ──
+let _searchTimer=null;
+function doSearch(val,inputId){
+  S.ui.search=val;
+  clearTimeout(_searchTimer);
+  _searchTimer=setTimeout(()=>{
+    const c=document.getElementById('content');
+    if(c)c.innerHTML=`<div class="fade">${getTab(S.tab)}</div>`;
+    const inp=document.getElementById(inputId);
+    if(inp){inp.focus();try{const l=val.length;inp.setSelectionRange(l,l);}catch(e){}}
+  },120);
+}
+function doLibSearch(val){
+  S.ui.libSearch=val;
+  clearTimeout(_searchTimer);
+  _searchTimer=setTimeout(()=>{
+    const c=document.getElementById('content');
+    if(c)c.innerHTML=`<div class="fade">${getTab(S.tab)}</div>`;
+    const inp=document.getElementById('libsearch');
+    if(inp){inp.focus();try{const l=val.length;inp.setSelectionRange(l,l);}catch(e){}}
+  },120);
+}
+document.getElementById('sbtog').addEventListener('click',()=>{S.sbOpen=!S.sbOpen;buildSidebar();});
+document.addEventListener('input',e=>{
+  if(e.target.id==='sbsearch'){doSearch(e.target.value,'sbsearch');}
+});
+// Load current user from storage
+function initApp(){
+  const saved=ld(K.cu);
+  if(saved){
+    const users=loadUsers();
+    const fresh=users.find(u=>u.id===saved.id);
+    if(fresh&&fresh.status==='active'){CU=fresh;}
+    else{CU=null;sv(K.cu,null);}
+  }
+  initStreaks();applyTheme();render();updateAuthUI();
+}
+function updateAuthUI(){
+  const av=document.getElementById('uav');const un=document.getElementById('uname');
+  const ui=document.getElementById('uinfo');
+  if(CU){
+    if(av){av.textContent=CU.name[0].toUpperCase();av.style.background=CU.avatar||'linear-gradient(135deg,var(--acc2),var(--acc))';}
+    if(un)un.textContent=CU.name;
+    if(ui){const r=ui.querySelector('.ur');if(r)r.textContent=CU.role==='owner'?'Creator':CU.role;}
+  } else {
+    if(av){av.textContent='?';av.style.background='var(--border2)';}
+    if(un)un.textContent='Guest';
+    if(ui){const r=ui.querySelector('.ur');if(r)r.textContent='Tap to sign in';}
+  }
+  const btn=document.getElementById('sb-auth-btn');
+  if(btn)btn.textContent=CU?'Sign Out':'Sign In';
+}
+// ── POLISH v2: auth + shortcuts ──
+(function(){
+  const _oa=openAuth;
+  openAuth=function(t){_oa(t);setTimeout(()=>{
+    const f=document.getElementById('li-name')||document.getElementById('reg-name');
+    if(f){f.setAttribute('autocomplete','username');f.focus();}
+    const lp=document.getElementById('li-pass');if(lp)lp.setAttribute('autocomplete','current-password');
+    ['reg-pass','reg-cp'].forEach(i=>{const x=document.getElementById(i);if(x)x.setAttribute('autocomplete','new-password');});
+  },30);};
+  document.addEventListener('input',e=>{
+    if(e.target.id!=='reg-pass')return;
+    let el=document.getElementById('pw-str');
+    if(!el){el=document.createElement('div');el.id='pw-str';e.target.parentNode.after(el);}
+    const v=e.target.value;
+    const sc=(v.length>=8)+(/[A-Z]/.test(v)&&/[a-z]/.test(v))+(/\d/.test(v))+(/[^A-Za-z0-9]/.test(v));
+    el.dataset.s=sc;el.innerHTML='<i style="width:'+(sc*25)+'%"></i>';
+  });
+  document.addEventListener('keydown',e=>{
+    const t=e.target,typing=/INPUT|TEXTAREA|SELECT/.test(t.tagName);
+    if(e.key==='Enter'&&/^reg-/.test(t.id)){doRegister();return;}
+    if(e.key==='Escape'){closeAuth();if(S.nyx.open)toggleNyx();return;}
+    if(typing||e.metaKey||e.ctrlKey||e.altKey)return;
+    if(e.key==='/'){e.preventDefault();const q=document.getElementById('sbsearch');if(q)q.focus();}
+    else if(e.key.toLowerCase()==='n')toggleNyx();
+  });
+})();
+window.addEventListener('offline',()=>toast('You are offline'));
+window.addEventListener('online',()=>toast('Back online'));
+// Check consent on load
+if(!ld(K.con)){
+  document.getElementById('consent-modal').style.display='flex';
+} else {
+  initApp();
+}
+</script>
+</body>
+</html>
