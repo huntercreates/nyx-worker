@@ -1,3 +1,7 @@
 name = "nyx-worker"
 main = "worker.js"
 compatibility_date = "2024-01-01"
+[[d1_databases]]
+binding = "DB"
+database_name = "nexus-db"
+database_id = "6f9b8fba-d4c7-4973-962f-2770518f1f2e"
